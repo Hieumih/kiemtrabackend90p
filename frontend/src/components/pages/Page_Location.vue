@@ -1,37 +1,45 @@
 <template>
-    <Input_Modal ref="addModal" :columns="columns" @save="addItem" />
-
     <div>
-        <div>
-            <button @click="showAddModel">Add</button>
-        </div>
-        <div>
-            <input type="text" v-model="searchValue" placeholder="Search...">
-        </div>
-
-        <EasyDataTable :headers="headers" :items="items" :rows-items="[5, 10, 20, 50, 100]" :rows-per-page="10"
-            :loading="loading" :server-items-length="serverItemsLength" v-model:server-options="serverOptions"
-            border-cell buttons-pagination show-index>
-            <template #item-operation="item">
-                <button @click="editItem(item)">Edit</button>
-                <button @click="deleteItem(item)">Delete</button>
-            </template>
-        </EasyDataTable>
+        <Input_Modal ref="addModal" :columns="columns" @save="addItem" :title="'Add'" />
+        <Input_Modal ref="editModal" :columns="columns" @save="editItem" :title="'Edit'" />
+        <Import_Modal ref="importModal" :columns="columns" @save="uploadItems" :title="'Import'" />
     </div>
+    <div>
+        <button class="btn btn-primary  m-1" @click="showAddModel">Add</button>
+        <button class="btn btn-primary  m-1" @click="showImportModel">Import</button>
+        <button class="btn btn-primary  m-1" @click="loadFromServer">Refresh</button>
+    </div>
+    <div>
+        <input type="text" v-model="searchValue" placeholder="Search...">
+    </div>
+
+    <EasyDataTable :headers="headers" :items="items" :rows-items="[5, 10, 20, 50, 100]" :rows-per-page="10"
+        :loading="loading" :server-items-length="serverItemsLength" v-model:server-options="serverOptions" border-cell
+        buttons-pagination show-index>
+        <template #item-name="{ code, name }">
+            <RouterLink :to="`${useRouter().currentRoute.value.path}/${code}`">{{ name }}</RouterLink>
+        </template>
+        <template #item-operation="item">
+            <button class="btn btn-warning m-1" @click="showEditModel(item)">Edit</button>
+            <button class="btn btn-danger  m-1" @click="deleteItem(item)">Delete</button>
+        </template>
+    </EasyDataTable>
 
 </template>
 
 <script setup>
-import $ from "jquery";
-import EasyDataTable from 'vue3-easy-data-table';
-// import type { Header, Item, ServerOptions } from "vue3-easy-data-table";
-import 'vue3-easy-data-table/dist/style.css';
 import { ref, watch, onMounted } from "vue";
+import { useRouter } from "vue-router"
 import { debounce } from "lodash";
-import { Input_Modal } from "@/components/elements"
-import {getAPIUrl} from '@/config.js'
+import EasyDataTable from 'vue3-easy-data-table';
+import { Input_Modal, Import_Modal } from "@/components/elements";
+import { getAPIUrl, childApiUrl } from '@/config.js'
+import $ from "jquery";
 
-const apiUrl = getAPIUrl();
+
+import 'vue3-easy-data-table/dist/style.css';
+
+const apiUrl = getAPIUrl() + childApiUrl.location.url;
 
 const columns = [
     { text: 'Mã', value: 'code' },
@@ -53,20 +61,27 @@ const serverOptions = ref({
 });
 
 const addModal = ref(null);
+const editModal = ref(null);
+const importModal = ref(null);
 
 const loadFromServer = async () => {
     loading.value = true;
-    const {
-        data,
-        recordsTotal,
-    } = await $.get(apiUrl + "Locations", {
-        take: serverOptions.value.rowsPerPage,
-        skip: (serverOptions.value.page - 1) * serverOptions.value.rowsPerPage,
-        search: searchValue.value,
-    })
-    //console.log(data);
-    items.value = data;
-    serverItemsLength.value = recordsTotal;
+    try {
+        const {
+            data,
+            recordsTotal,
+        } = await $.get(apiUrl, {
+            take: serverOptions.value.rowsPerPage,
+            skip: (serverOptions.value.page - 1) * serverOptions.value.rowsPerPage,
+            search: searchValue.value,
+        })
+        //console.log(data);
+        items.value = data;
+        serverItemsLength.value = recordsTotal;
+    }
+    catch (error) {
+        console.log(error);
+    }
     loading.value = false;
 };
 
@@ -79,20 +94,24 @@ const showAddModel = () => {
     addModal.value.modalToggle();
 };
 
+const showEditModel = (item) => {
+    editModal.value.modalToggle(item);
+};
+
+const showImportModel = () => {
+    importModal.value.modalToggle();
+};
+
 const addItem = (item, closeModal) => {
     console.log('Add', cleanItem(item));
     var settings = {
-        "url": apiUrl + "Locations/add",
+        "url": apiUrl + childApiUrl.location.add,
         "method": "POST",
         "timeout": 0,
         "headers": {
             "Content-Type": "application/json"
         },
-        "data": JSON.stringify({
-            "code": item.code,
-            "name": item.name,
-            "description": item.description
-        }),
+        "data": JSON.stringify(item),
     };
     $.ajax(settings).done(function (data, textStatus, jqXHR) {
         closeModal();
@@ -101,20 +120,65 @@ const addItem = (item, closeModal) => {
 
 };
 
-const editItem = (item) => {
+const editItem = (item, closeModal) => {
     console.log("Edit", cleanItem(item));
+    var settings = {
+        "url": apiUrl + childApiUrl.location.update,
+        "method": "PUT",
+        "timeout": 0,
+        "headers": {
+            "Content-Type": "application/json"
+        },
+        "data": JSON.stringify(item),
+    };
+    $.ajax(settings).done(function (data, textStatus, jqXHR) {
+        loadFromServer();
+        closeModal();
+    })
+
 };
 
 const deleteItem = (item) => {
-    console.log("Delete", cleanItem(item));
+    console.log("Delete", item);
+    var settings = {
+        "url": `${apiUrl}${childApiUrl.location.delete}?id=${item[childApiUrl.location.primarykey]}`,
+        "method": "DELETE",
+        "timeout": 0,
+        "headers": {
+            "Content-Type": "application/json"
+        },
+        // "data": JSON.stringify(item),
+    };
+    $.ajax(settings).done(function (data, textStatus, jqXHR) {
+        loadFromServer();
+    })
+};
+
+const uploadItems = (items, doneFunct, ErrorFunct) => {
+    console.log("Upload", items);
+    var settings = {
+        "url": apiUrl + childApiUrl.location.upload,
+        "method": "POST",
+        "timeout": 0,
+        "headers": {
+            "Content-Type": "application/json"
+        },
+        "data": JSON.stringify(items),
+    };
+    $.ajax(settings).done(function (data, textStatus, jqXHR) {
+        loadFromServer();
+        doneFunct();
+    }).fail(function (jqXHR, textStatus, errorThrown) {
+        ErrorFunct();
+    });
 };
 
 const debouncedLoadFromServer = debounce(loadFromServer, 500);
 
 onMounted(() => {
-    console.log(serverOptions.value);
     loadFromServer();
-    console.log(addModal.value);
+    //const router = useRouter();
+    //console.log(router.currentRoute.value.path);
 });
 
 watch(serverOptions, () => { loadFromServer(); }, { deep: true });

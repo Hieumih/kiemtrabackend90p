@@ -4,16 +4,6 @@
             <i @click="closeSidebar" class="bi bi-list menu"></i>
             <span class="text" ref="path">
                 <!-- modify this -->
-                <template v-if="routerLinks.length !== 0">
-                    <template v-for="(item, index) in routerLinks" :key="index">
-                        <router-link :to="item.link" @click="goToPath(item)" class="link">{{ item.text }}</router-link>
-                        <!-- Add a separator if it's not the last item -->
-                        <span v-if="index < routerLinks.length - 1"> / </span>
-                    </template>
-                </template>
-                <template v-else>
-                    <router-link to="/dashboard" class="link">Dashboard</router-link>
-                </template>
             </span>
         </div>
         <div class="container-custom">
@@ -25,35 +15,30 @@
 </template>
 
 <script setup>
-import { ref, defineEmits, withDefaults } from 'vue';
+import { ref, defineEmits, withDefaults, watch } from 'vue';
+import { useRoute } from 'vue-router';
 
 const props = defineProps({
     isClosed: {
         type: Boolean,
         default: false
     },
-    isClosed: {
-        type: Boolean,
-        default: false
-    }
 });
 
 const emit = defineEmits(['closeSidebar']);
-
-const routerLinks = ref([]); // Initialize routerLinks array
 
 const closeSidebar = () => {
     emit('closeSidebar');
 };
 
-const modifyPath = (items) => {
-    console.log(items);
-    routerLinks.value = items;
-};
+const paths = ref([]);
 
-const goToPath = (item) => {
-    routerLinks.value = routerLinks.value.slice(0, routerLinks.value.indexOf(item) + 1);
-};
+const route = useRoute();
+
+watch(() => route.path, (path) => {
+    console.log(route);
+});
+
 </script>
 
 <style scoped>

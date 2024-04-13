@@ -46,7 +46,7 @@ import 'bootstrap-icons/font/bootstrap-icons.css';
 const props = defineProps({
     imgsrc: {
         type: String,
-        default: 'img/user.jpg'
+        default: '/img/user.jpg'
     },
     profile_name: {
         type: String,

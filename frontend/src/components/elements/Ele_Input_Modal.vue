@@ -1,9 +1,9 @@
 <template>
-    <div class="modal fade" id="modal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+    <div class="modal fade" ref="modalRef" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="modalLabel">Thêm</h1>
+                    <h1 class="modal-title fs-5" id="modalLabel">{{ title }}</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <form action="" @submit.prevent="saveItem">
@@ -14,15 +14,20 @@
                                     <!-- <label :for="column.key" class="form-label">
                                         {{ column.title }}
                                     </label> -->
-                                    <input :type="column?.type ?? 'text'" :placeholder="column.text"
-                                        class="form-control" :required="column?.required ?? false" :id="column.value"
-                                        v-model="formData[column.value]">
+                                    <input  class="form-control"
+                                            :type="column?.type ?? 'text'" 
+                                            :placeholder="column.text" 
+                                            :required="column?.required ?? false" 
+                                            :id="column.value"
+                                            :disabled="column?.disabled ?? false"
+                                            v-model="formData[column.value]">
                                 </template>
-
                             </div>
                         </template>
+                        
                         <!-- <input class="input-text mb-3" v-for="(column, index) in columns" :key="index" type="text" :placeholder="column.title"> -->
-                        <p id="addNotice"></p>
+                        <slot></slot>
+                        <p ref="noticeRef" hidden></p>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" @click="clearForm"
@@ -43,39 +48,50 @@ import { ref, defineProps, defineEmits, onMounted } from 'vue';
 const props = defineProps({
     columns: {
         type: Array,
-        required: true,
-    },
-    formData: {
-        type: Object,
         required: false,
-        default: () => ({})
+        default: () => []
     },
+    // formData: {
+    //     type: Object,
+    //     required: false,
+    //     default: () => ({})
+    // },
+    title: {
+        type: String,
+        required: true,
+    }
 });
 
 const emit = defineEmits(['save']);
 
-const modal = ref(null);
+const modalRef = ref(null);
+let modal = null;
+
+
+const formData = ref({});
 
 const clearForm = () => {
-    for (const key in props.formData) {
-        props.formData[key] = "";
+    for (const key in formData.value) {
+        formData.value[key] = "";
     }
 };
 
-const modalToggle = () => {
-    modal.value.toggle();
+const modalToggle = (data = null) => {
+    console.log('Showing', props.title, 'modal');
+    modal.toggle();
+    data !== null ? formData.value = data : null;
 };
 
 const saveItem = () => {
-    emit('save', props.formData, () => {
+    emit('save', formData.value, () => {
         clearForm();
         modalToggle();
     });
 };
 
 onMounted(() => {
-    modal.value = new Modal(document.getElementById('modal'));
-    console.log(props.formData)
+    modal = new Modal(modalRef.value);
+    //console.log(props.formData)
 });
 
 defineExpose(
