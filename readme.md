@@ -16,7 +16,7 @@
     - Click vào `Configure Startup Project`
     - Tíck vào `Multiple startup project`
 1. Launch thì 2 cửa sổ CMD xuất hiện
-
+1. Vào `http://localhost:5173/` để trải nghiệm
 
 ### Đối với Visual Studio Code
 1. Đặt đúng workspace chứa 2 thư mục project
