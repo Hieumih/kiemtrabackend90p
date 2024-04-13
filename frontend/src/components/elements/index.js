@@ -1,0 +1,22 @@
+import Ele_HomeSection from "./Ele_HomeSection.vue";
+import Ele_LeftSideBar from "./Ele_LeftSideBar.vue";
+import Ele_SideBarDropDown from "./Ele_SideBarDropDown.vue";
+import Ele_Table from "./Ele_Table.vue";
+import Ele_Table_AddEditRemove from "./Ele_Table_AddEditRemove.vue";
+import Ele_Input_Modal from "./Ele_Input_Modal.vue";
+
+export const HomeSection = Ele_HomeSection;
+export const LeftSideBar = Ele_LeftSideBar;
+export const SideBarDropDown = Ele_SideBarDropDown;
+export const Table = Ele_Table;
+export const Table_AddEditRemove = Ele_Table_AddEditRemove;
+export const Input_Modal = Ele_Input_Modal;
+
+export default {
+    HomeSection,
+    LeftSideBar,
+    SideBarDropDown,
+    Table,
+    Table_AddEditRemove,
+    Input_Modal
+}

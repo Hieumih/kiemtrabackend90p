@@ -1,0 +1,5 @@
+# build
+bin
+Migrations
+obj/debug
+obj/release
