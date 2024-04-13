@@ -1,5 +1,6 @@
 # Cập nhật
-- Không có
+# build 1
+-- Thêm upload cho locations (test)
 
 
 # Todo

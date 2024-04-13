@@ -2,6 +2,10 @@
 using CRM_CMC.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Principal;
+using System.IO;
+using CsvHelper;
+using System.Globalization;
 
 namespace CRM_CMC.Controllers
 {
@@ -17,10 +21,21 @@ namespace CRM_CMC.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetLocations([FromQuery] int skip, [FromQuery] int take, [FromQuery] string? search)
+        public IActionResult GetLocations([FromQuery] int skip, [FromQuery] int take = 10, [FromQuery] string? search = null)
         {
             // Get the total number of locations
-            
+            if (skip < 0)
+            {
+                return BadRequest("Skip must be greater than or equal to 0");
+            }
+            if (take <= 0)
+            {
+                return BadRequest("Take must be greater than or equal to 0");
+            }
+            if (take > 200)
+            {
+                return BadRequest("Take must be less than or equal to 200");
+            }
 
             // Filter the data if a search term is provided
             IQueryable<TblLocation> data = _context.TblLocations.AsQueryable();
@@ -92,5 +107,37 @@ namespace CRM_CMC.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
         }
+
+        [HttpGet]
+        [Route("get/{id}")]
+        public IActionResult GetLocation(int id)
+        {
+            try
+            {
+                var location = this._context.TblLocations.Find(id);
+                return Ok(location);
+            }
+            catch (System.Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+            }
+        }
+
+        [HttpPost]
+        [Route("upload")]
+        public IActionResult UploadLocations([FromBody]List<TblLocation> locations)
+        {
+            try
+            {
+                this._context.TblLocations.AddRange(locations);
+                this._context.SaveChanges();
+                return Ok("Locations uploaded successfully");
+            }
+            catch (System.Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+            }
+        } 
+        
     }
 }
