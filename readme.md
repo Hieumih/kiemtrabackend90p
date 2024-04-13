@@ -6,8 +6,30 @@
 
 # Hướng dẫn debug
 
-## Trước khi debug
-- Đặt workspace đúng thư mục solution
-- Mở terminal
-- Vào thư mục frontend `cd frontend`
-- Chạy lệnh `npm i`
+### Đối với Microsoft Visual Studio 2022
+1. Mở visual studio 2022 với `CRM_CMC.sln`
+1. Mở Developer PowerShell
+1. Vào thư mục frontend `cd frontend`
+1. Chạy lệnh `npm i` để cài module
+1. Cài đặt chế độ Debug thành `Multiple startup project`
+    - Chuột phải vào `solution`
+    - Click vào `Configure Startup Project`
+    - Tíck vào `Multiple startup project`
+1. Launch thì 2 cửa sổ CMD xuất hiện
+
+
+### Đối với Visual Studio Code
+1. Đặt đúng workspace chứa 2 thư mục project
+1. Mở backend
+    - Mở 1 cửa sổ terminal
+    - Vào thư mục CRM_CMC `cd CRM_CMC`
+    - Chạy ứng dụng `dotnet run`
+1. Mở frontend
+    - Mở 1 cửa sổ terminal
+    - Vào thư mục frontend `cd frontend` 
+    - Chạy lệnh `npm run dev` để mở frontend ở chế độ dev
+1. Vào `http://localhost:5173/` để trải nghiệm
+* Lưu ý chỉ dùng ở `http://localhost:5173/location`
+
+# Hướng dẫn cho production
+1. Hướng dẫn sau 😐

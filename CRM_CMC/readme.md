@@ -1,6 +1,6 @@
 # Cập nhật
 # build 1
--- Thêm upload cho locations (test)
+- Thêm upload cho locations (test)
 
 
 # Todo
