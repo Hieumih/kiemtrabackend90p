@@ -1,6 +1,6 @@
 <template>
     <div class="modal fade" ref="modalRef" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-dialog-scrollable modal-xl">
             <div class="modal-content">
                 <div class="modal-header">
                     <h1 class="modal-title fs-5" id="modalLabel">{{ title }}</h1>
@@ -12,24 +12,20 @@
                         <!-- file -->
                         <div class="mb-3">
                             <!-- <label for="file" class="form-label">File</label> -->
-                            <input type="file" 
-                                class="form-control" 
-                                ref="fileRef" 
-                                accept=".csv"
-                                v-on:change="readFile" 
+                            <input type="file" class="form-control" ref="fileRef" accept=".csv, .xlsx" v-on:change="readFile"
                                 required>
-                            <small>Accepted file types: CSV</small>
+                            <small>Accepted file types: CSV, XLSX</small>
                         </div>
 
                         <div class="mb-3">
-                            <EasyDataTable :headers="columns" :items="data" :rows-items="[5, 10, 20, 50, 100]" :rows-per-page="10"
-                                :loading="false" :server-items-length="0" border-cell
-                                buttons-pagination show-index/>
+                            <EasyDataTable :headers="columns" :items="data" :rows-items="[5, 10, 20, 50, 100]"
+                                :rows-per-page="10" :loading="false" :server-items-length="0" border-cell
+                                buttons-pagination show-index />
                         </div>
-                        
+
                         <!-- <input class="input-text mb-3" v-for="(column, index) in columns" :key="index" type="text" :placeholder="column.title"> -->
                         <slot></slot>
-                        
+
                     </div>
                     <div class="modal-footer">
                         <p ref="noticeRef" hidden></p>
@@ -49,6 +45,7 @@ import { Modal } from 'bootstrap';
 import { ref, defineProps, defineEmits, onMounted } from 'vue';
 import EasyDataTable from 'vue3-easy-data-table';
 import Papa from 'papaparse'; // CSV parser
+import XLSX from 'xlsx'; // Excel parser
 
 const props = defineProps({
     columns: {
@@ -89,34 +86,37 @@ const clearFile = () => {
     noticeRef.value.hidden = true;
 };
 
-const readFile = () => {
+const readFile = async () => {
     sumbitBtnRef.value.disabled = true;
+    noticeRef.value.hidden = true;
+    data.value = [];
     const file = fileRef.value.files[0]; // get the file
-    const reader = new FileReader(); // create a new FileReader
-    reader.onload = (e) => { // once the file is read...
-        let text = e.target.result; // get the file content
-        const results = Papa.parse(text, { header: true, transformHeader: header => header.toLowerCase() }); // parse the CSV
-        const header = results.meta.fields; // get the header
-        // if props.column not in header return
-        if (!props.columns.every(column => header.includes(column.value))) {
-            console.error('Invalid file format');
-            noticeRef.value.hidden = false;
-            noticeRef.value.innerText = 'Invalid file format';
-            return;
-        }
+    if (!file) return; // if no file return
+    const result = await file.arrayBuffer()
+    const wb = XLSX.read(result, { type: 'array' });
+    const ws = wb.Sheets[wb.SheetNames[0]];
 
-        results.data.pop(); // remove the last row (empty row)
-        // set the data
-        data.value = results.data.map(row => { // map the rows
-            const record = {};
-            props.columns.forEach(column => { // for each column...
-                record[column.value] = row[column.value]; // set the value
-            });
-            return record;
+    const header = XLSX.utils.sheet_to_json(ws, { header: 1 })[0]; // get the header
+
+    if (!props.columns.every(column => header.map(col => col.toLowerCase()).includes(column.value))) {
+        console.error('Invalid file format');
+        noticeRef.value.hidden = false;
+        noticeRef.value.innerText = 'Invalid file format';
+        return;
+    }
+
+    const jsonData = XLSX.utils.sheet_to_json(ws);
+    // lowercase onject keys
+    data.value = jsonData.map(row => {
+        const record = {};
+        Object.keys(row).forEach(key => {
+            record[key.toLowerCase()] = row[key];
         });
-        sumbitBtnRef.value.disabled = false;
-    };
-    reader.readAsText(file);
+        return record;
+    });
+
+    sumbitBtnRef.value.disabled = false;
+
 
 };
 

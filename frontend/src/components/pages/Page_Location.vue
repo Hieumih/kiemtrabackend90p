@@ -3,11 +3,13 @@
         <Input_Modal ref="addModal" :columns="columns" @save="addItem" :title="'Add'" />
         <Input_Modal ref="editModal" :columns="columns" @save="editItem" :title="'Edit'" />
         <Import_Modal ref="importModal" :columns="columns" @save="uploadItems" :title="'Import'" />
+        <Export_Modal ref="exportModal" :title="'Export'" />
     </div>
     <div>
         <button class="btn btn-primary  m-1" @click="showAddModel">Add</button>
         <button class="btn btn-primary  m-1" @click="showImportModel">Import</button>
-        <button class="btn btn-primary  m-1" @click="loadFromServer">Refresh</button>
+        <button class="btn btn-primary  m-1" @click="showExportModel">Export</button>
+        <button class="btn btn-primary  m-1" @click="getItems">Refresh</button>
     </div>
     <div>
         <input type="text" v-model="searchValue" placeholder="Search...">
@@ -32,7 +34,7 @@ import { ref, watch, onMounted } from "vue";
 import { useRouter } from "vue-router"
 import { debounce } from "lodash";
 import EasyDataTable from 'vue3-easy-data-table';
-import { Input_Modal, Import_Modal } from "@/components/elements";
+import { Input_Modal, Import_Modal, Export_Modal } from "@/components/elements";
 import { getAPIUrl, childApiUrl } from '@/config.js'
 import $ from "jquery";
 
@@ -63,8 +65,33 @@ const serverOptions = ref({
 const addModal = ref(null);
 const editModal = ref(null);
 const importModal = ref(null);
+const exportModal = ref(null);
 
-const loadFromServer = async () => {
+
+
+
+const cleanItem = (item) => {
+    const { key, index, ...cleanedItem } = item;
+    return cleanedItem;
+};
+
+const showAddModel = () => {
+    addModal.value.modalToggle();
+};
+
+const showEditModel = (item) => {
+    editModal.value.modalToggle(item);
+};
+
+const showExportModel = () => {
+    exportModal.value.modalToggle(items.value);
+};
+
+const showImportModel = () => {
+    importModal.value.modalToggle();
+};
+
+const getItems = async () => {
     loading.value = true;
     try {
         const {
@@ -85,23 +112,6 @@ const loadFromServer = async () => {
     loading.value = false;
 };
 
-const cleanItem = (item) => {
-    const { key, index, ...cleanedItem } = item;
-    return cleanedItem;
-};
-
-const showAddModel = () => {
-    addModal.value.modalToggle();
-};
-
-const showEditModel = (item) => {
-    editModal.value.modalToggle(item);
-};
-
-const showImportModel = () => {
-    importModal.value.modalToggle();
-};
-
 const addItem = (item, closeModal) => {
     console.log('Add', cleanItem(item));
     var settings = {
@@ -115,7 +125,7 @@ const addItem = (item, closeModal) => {
     };
     $.ajax(settings).done(function (data, textStatus, jqXHR) {
         closeModal();
-        loadFromServer();
+        getItems();
     })
 
 };
@@ -132,7 +142,7 @@ const editItem = (item, closeModal) => {
         "data": JSON.stringify(item),
     };
     $.ajax(settings).done(function (data, textStatus, jqXHR) {
-        loadFromServer();
+        getItems();
         closeModal();
     })
 
@@ -150,7 +160,7 @@ const deleteItem = (item) => {
         // "data": JSON.stringify(item),
     };
     $.ajax(settings).done(function (data, textStatus, jqXHR) {
-        loadFromServer();
+        getItems();
     })
 };
 
@@ -166,22 +176,22 @@ const uploadItems = (items, doneFunct, ErrorFunct) => {
         "data": JSON.stringify(items),
     };
     $.ajax(settings).done(function (data, textStatus, jqXHR) {
-        loadFromServer();
+        getItems();
         doneFunct();
     }).fail(function (jqXHR, textStatus, errorThrown) {
         ErrorFunct();
     });
 };
 
-const debouncedLoadFromServer = debounce(loadFromServer, 500);
+const debouncedLoadFromServer = debounce(getItems, 500);
 
 onMounted(() => {
-    loadFromServer();
+    getItems();
     //const router = useRouter();
     //console.log(router.currentRoute.value.path);
 });
 
-watch(serverOptions, () => { loadFromServer(); }, { deep: true });
+watch(serverOptions, () => { getItems(); }, { deep: true });
 watch(searchValue, () => { debouncedLoadFromServer(); }, { deep: true });
 
 </script>
