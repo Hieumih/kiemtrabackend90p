@@ -1,9 +1,12 @@
 # Cập nhật
 
-# build 2
+## build 3
+- Thêm chức năng xóa nhiều
+
+## build 2
 - Thêm chức năng sort
 
-# build 1
+## build 1
 - Thêm upload cho locations (test)
 
 

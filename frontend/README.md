@@ -4,6 +4,9 @@
 
 # Chỉnh sửa gần đây
 
+## build 6
+1. Thêm chức năng xóa nhiều
+
 ## build 5
 1. Thêm chức năng sort cho bảng
 

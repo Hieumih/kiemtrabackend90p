@@ -29,6 +29,8 @@
     - Vào thư mục frontend `cd frontend` 
     - Chạy lệnh `npm run dev` để mở frontend ở chế độ dev
 1. Vào `http://localhost:5173/` để trải nghiệm
+
+###
 * Lưu ý chỉ dùng ở `http://localhost:5173/location`
 
 # Hướng dẫn cho production
