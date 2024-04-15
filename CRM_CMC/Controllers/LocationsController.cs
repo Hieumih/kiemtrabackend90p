@@ -21,7 +21,11 @@ namespace CRM_CMC.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetLocations([FromQuery] int skip, [FromQuery] int take = 10, [FromQuery] string? search = null)
+        public IActionResult GetLocations([FromQuery] int skip, 
+            [FromQuery] int take = 10, 
+            [FromQuery] string? search = null, 
+            [FromQuery] string? sortBy = nameof(TblLocation.LocationId),
+            [FromQuery] string? sortType = "asc")
         {
             // Get the total number of locations
             if (skip < 0)
@@ -39,6 +43,18 @@ namespace CRM_CMC.Controllers
 
             // Filter the data if a search term is provided
             IQueryable<TblLocation> data = _context.TblLocations.AsQueryable();
+
+            // Sort the data
+            if (sortBy == nameof(TblLocation.LocationId).ToLower()) {
+                data = sortType == "asc" ? data.OrderBy(l => l.LocationId) : data.OrderByDescending(l => l.LocationId);
+            } else if (sortBy == nameof(TblLocation.Code).ToLower()) {
+                data = sortType == "asc" ? data.OrderBy(l => l.Code) : data.OrderByDescending(l => l.Code);
+            } else if (sortBy == nameof(TblLocation.Name).ToLower()) {
+                data = sortType == "asc" ? data.OrderBy(l => l.Name) : data.OrderByDescending(l => l.Name);
+            } else if (sortBy == nameof(TblLocation.Description).ToLower()) {
+                data = sortType == "asc" ? data.OrderBy(l => l.Description) : data.OrderByDescending(l => l.Description);
+            }
+
             if (!string.IsNullOrEmpty(search))
             {
                 data = data.Where(l => l.Code.Contains(search) || l.Name.Contains(search) || l.Description.Contains(search));
@@ -129,6 +145,7 @@ namespace CRM_CMC.Controllers
         {
             try
             {
+                locations.ForEach(l => l.LocationId = 0);
                 this._context.TblLocations.AddRange(locations);
                 this._context.SaveChanges();
                 return Ok("Locations uploaded successfully");
@@ -138,6 +155,23 @@ namespace CRM_CMC.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
         } 
+
+        [HttpDelete]
+        [Route("deleteMultiple")]
+        public IActionResult DeleteMultipleLocations([FromBody] List<TblLocation> locations)
+        {
+            foreach (var location in locations)
+            {
+                var entity = this._context.TblLocations.Find(location.LocationId);
+                if (entity != null)
+                {
+                    this._context.TblLocations.Remove(entity);
+                }
+            }
+            this._context.SaveChanges();
+            return Ok("Locations deleted successfully");
+        }
+
         
     }
 }

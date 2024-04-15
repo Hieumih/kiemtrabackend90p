@@ -1,6 +1,8 @@
+import { defineAsyncComponent } from 'vue'
 import { createMemoryHistory, createWebHistory, createRouter } from "vue-router";
-import { Customer, Dashboard, Location, Location_Detail } from '../components/pages/index.js';
-import Router_Home from './Router_Home.vue';
+import { Customer, Dashboard, Location, Location_Detail } from '@/components/pages/index.js';
+
+export const Router_Home = () => import('./Router_Home.vue')
 
 const routes = [
     {

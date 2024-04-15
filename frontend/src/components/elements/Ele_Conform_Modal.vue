@@ -6,21 +6,9 @@
                     <h1 class="modal-title fs-5" id="modalLabel">{{ title }}</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form action="" @submit.prevent="saveItem">
+                <form action="" @submit.prevent="saveData">
                     <div class="modal-body">
-                        <template v-for="(column, index) in columns" :key="index">
-                            <div class="mb-3">
-                                <template v-if="!(column?.hidden ?? false)">
-                                    <!-- <label :for="column.key" class="form-label">
-                                        {{ column.title }}
-                                    </label> -->
-                                    <input class="form-control" :type="column?.type ?? 'text'"
-                                        :placeholder="column.text" :required="column?.required ?? false"
-                                        :id="column.value" :disabled="(column?.disabled ?? false) || formDisabled"
-                                        v-model="formData[column.value]">
-                                </template>
-                            </div>
-                        </template>
+
 
                         <!-- <input class="input-text mb-3" v-for="(column, index) in columns" :key="index" type="text" :placeholder="column.title"> -->
                         <slot></slot>
@@ -36,7 +24,6 @@
         </div>
     </div>
 </template>
-
 
 <script setup>
 import { Modal } from 'bootstrap';
@@ -63,7 +50,9 @@ const emit = defineEmits(['save']);
 
 const formDisabled = ref(false);
 
+const saveFunction = ref( () => {} );
 
+const sumbitBtnRef = ref(null);
 const modalRef = ref(null);
 let modal = null;
 
@@ -76,21 +65,17 @@ const clearForm = () => {
     }
 };
 
-const modalToggle = (data = null) => {
+const modalToggle = (save_function) => {
     console.log('Showing', props.title, 'modal');
     modal.toggle();
-    data !== null ? formData.value = data : null;
+    saveFunction.value = save_function;
 };
 
-const saveItem = () => {
-    formDisabled.value = true;
-    emit('save', formData.value, () => {
-        modalToggle();
-        clearForm();
-        formDisabled.value = false;
-    }, () => {
-        formDisabled.value = false;
-    });
+const saveData = async () => {
+    sumbitBtnRef.value.disabled = true;
+    await saveFunction.value();
+    modal.toggle();
+    sumbitBtnRef.value.disabled = false;
 };
 
 onMounted(() => {

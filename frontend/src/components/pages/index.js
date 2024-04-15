@@ -1,24 +1,26 @@
-import Page_Customer from "./Page_Customer.vue";
-import Page_Dashboard from "./Page_Dashboard.vue";
-import Page_Location from "./Page_Location.vue";
-import Page_Location_1 from "./Page_Location_1.vue";
-import Page_Location_2 from "./Page_Location_2.vue";
-import Page_Location_Detail from "./Page_Location_Detail.vue";
+import { defineAsyncComponent, defineComponent } from 'vue'
+// import Page_Customer from "./Page_Customer.vue";
+// import Page_Dashboard from "./Page_Dashboard.vue";
+// import Page_Location from "./Page_Location.vue";
+// import Page_Location_1 from "./Page_Location_1.vue";
+// import Page_Location_2 from "./Page_Location_2.vue";
+// import Page_Location_Detail from "./Page_Location_Detail.vue";
 
 
-export const Customer = Page_Customer;
-export const Dashboard = Page_Dashboard;
-export const Location = Page_Location;
-export const Location_1 = Page_Location_1;
-export const Location_2 = Page_Location_2;
-export const Location_Detail = Page_Location_Detail;
+// export const Dashboard = defineAsyncComponent(() => import('./Page_Dashboard.vue'));
+export const Dashboard = () => import('./Page_Dashboard.vue');
+export const Customer = () => import('./Page_Customer.vue');
+export const Location = () => import('./Page_Location.vue');
+// export const Location_1 = defineAsyncComponent(() => import('./Page_Location_1.vue'));
+// export const Location_2 = defineAsyncComponent(() => import('./Page_Location_2.vue'));
+export const Location_Detail = defineAsyncComponent(() => import('./Page_Location_Detail.vue'));
 
 
 export default {
-    Customer,
     Dashboard,
+    Customer,
     Location,
-    Location_1,
-    Location_2,
+    // Location_1,
+    // Location_2,
     Location_Detail
 }

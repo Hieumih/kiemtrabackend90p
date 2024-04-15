@@ -1,4 +1,8 @@
 # Cập nhật
+
+# build 2
+- Thêm chức năng sort
+
 # build 1
 - Thêm upload cho locations (test)
 

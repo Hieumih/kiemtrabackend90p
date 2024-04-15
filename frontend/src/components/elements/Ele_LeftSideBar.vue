@@ -39,9 +39,10 @@
 </template>
 
 <script setup>
-import { ref, defineProps, defineEmits, onMounted } from 'vue';
-import DropDown from './Ele_SideBarDropDown.vue';
+import { ref, defineProps, defineEmits, onMounted, defineAsyncComponent } from 'vue';
 import 'bootstrap-icons/font/bootstrap-icons.css';
+// import DropDown from './Ele_SideBarDropDown.vue';
+const DropDown = defineAsyncComponent(() => import('./Ele_SideBarDropDown.vue'));
 
 const props = defineProps({
     imgsrc: {

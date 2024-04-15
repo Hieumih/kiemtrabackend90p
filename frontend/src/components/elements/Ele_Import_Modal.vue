@@ -28,7 +28,6 @@
 
                     </div>
                     <div class="modal-footer">
-                        <p ref="noticeRef" hidden></p>
                         <button type="button" class="btn btn-secondary" @click="clearFile"
                             data-bs-dismiss="modal">Close</button>
                         <button ref="sumbitBtnRef" type="submit" class="btn btn-primary" disabled>Save changes</button>
@@ -42,10 +41,9 @@
 
 <script setup>
 import { Modal } from 'bootstrap';
-import { ref, defineProps, defineEmits, onMounted } from 'vue';
-import EasyDataTable from 'vue3-easy-data-table';
-import Papa from 'papaparse'; // CSV parser
+import { ref, defineProps, defineEmits, onMounted, defineAsyncComponent } from 'vue';
 import XLSX from 'xlsx'; // Excel parser
+const EasyDataTable = defineAsyncComponent(() => import('vue3-easy-data-table'));
 
 const props = defineProps({
     columns: {
@@ -64,11 +62,10 @@ const props = defineProps({
     }
 });
 
-const emit = defineEmits(['save']);
+const emit = defineEmits(['save', 'fileError']);
 
 const modalRef = ref(null);
 const fileRef = ref(null);
-const noticeRef = ref(null);
 const sumbitBtnRef = ref(null);
 
 const data = ref([]);
@@ -83,15 +80,13 @@ const clearFile = () => {
     fileRef.value.value = '';
     data.value = [];
     sumbitBtnRef.value.disabled = true;
-    noticeRef.value.hidden = true;
 };
 
 const readFile = async () => {
     sumbitBtnRef.value.disabled = true;
-    noticeRef.value.hidden = true;
     data.value = [];
     const file = fileRef.value.files[0]; // get the file
-    if (!file) return; // if no file return
+    if (!file) return fileError(); // if no file return
     const result = await file.arrayBuffer()
     const wb = XLSX.read(result, { type: 'array' });
     const ws = wb.Sheets[wb.SheetNames[0]];
@@ -99,10 +94,7 @@ const readFile = async () => {
     const header = XLSX.utils.sheet_to_json(ws, { header: 1 })[0]; // get the header
 
     if (!props.columns.every(column => header.map(col => col.toLowerCase()).includes(column.value))) {
-        console.error('Invalid file format');
-        noticeRef.value.hidden = false;
-        noticeRef.value.innerText = 'Invalid file format';
-        return;
+        return fileError();
     }
 
     const jsonData = XLSX.utils.sheet_to_json(ws);
@@ -127,9 +119,12 @@ const saveData = () => {
         modalToggle();
     }, () => {
         sumbitBtnRef.value.disabled = false;
-        noticeRef.value.hidden = false;
-        noticeRef.value.innerText = 'Connection error';
     });
+};
+
+const fileError = () => {
+    console.error('Invalid file format');
+    emit('fileError');
 };
 
 onMounted(() => {
