@@ -1,8 +1,32 @@
 # ToDo
 1. Tối ưu chức năng `delete`
 1. Tách thành phần của page `Location` thành 1 thành phần riêng
+1. Thêm tìm kiếm vào selection trong trường hợp danh sách dài
+1. Thêm hoạt ảnh loading
+1. Tối ưu hoạt ảnh cho toast! `<TransitionGroup>`
+
+# Công cụ chỉ ở chế độ DEV
+- byPassLogin: skip Login vào giao diện chính
+    - Không thể gọi một số API vì chưa có token
+
 
 # Chỉnh sửa gần đây
+
+## build 10
+1. Thêm trang lịch
+
+## build 9
+1. Thêm tính năng đăng nhập
+
+## build 8
+1. BETA: Đăng nhập
+1. Thêm animation loading dành cho một số page
+1. Chặn một số route nếu người dùng đã đăng nhập hoặc chưa đăng nhập
+
+## build 7
+1. Thêm giao diện đăng nhập
+1. Thêm Hoạt ảnh cho router
+1. BETA: Loading
 
 ## build 6
 1. Thêm chức năng xóa nhiều

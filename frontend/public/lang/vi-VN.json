@@ -1,8 +1,16 @@
 {
     "dashboard": "Bảng điều khiển",
+    "user" : "Người dùng",
+    "account": "Tài khoản",
     "customer": "Khách hàng",
     "customerSource": "Nguồn khách hàng",
     "chat": "Trò chuyện",
     "location": "Khu vực",
-    "setting": "Cài đặt"
+    "setting": "Cài đặt",
+    "product": "Sản phẩm",
+    "order": "Đơn hàng",
+    "support": "Hỗ trợ",
+    "interaction": "Tương tác",
+    "schedule": "Lịch trình",
+    "project": "Dự án"
 }

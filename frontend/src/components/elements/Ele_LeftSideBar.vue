@@ -2,8 +2,10 @@
     <nav :class="{ 'sidebar': true, 'close': isClosed }" ref="sidebar">
         <div class="logo-details">
             <div class="logo-image">
-                <img src="https://cdn-icons-png.flaticon.com/512/25/25231.png" alt="logo" />
+                <!-- <img src="https://cdn-icons-png.flaticon.com/512/25/25231.png" alt="logo" /> -->
+                <i class="fa-solid fa-users-gear"></i>
             </div>
+            
             <span class="logo-name">CRM APP</span>
         </div>
 
@@ -71,18 +73,12 @@ const emit = defineEmits(['modifyPath', 'logout']);
 
 let user_photo = ref(null);
 
-const updateProfile = (image_src, name, role) => {
-    props.imgsrc = image_src;
-    props.profile_name = name;
-    props.role = role;
-};
-
 const logout = () => {
     emit('logout');
 };
 
 onMounted(() => {
-    console.log(props.url_link_icon_child);
+    import.meta.env.DEV && console.log(props.url_link_icon_child);
 });
 </script>
 
@@ -130,6 +126,11 @@ onMounted(() => {
 .sidebar .logo-details .logo-image img {
     width: 30px;
     height: 30px;
+}
+
+.sidebar .logo-details .logo-image i {
+    font-size: 30px;
+    color: #fff;
 }
 
 .sidebar .logo-details .logo-name {

@@ -1,0 +1,19 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "build Backend",
+			// "type": "dotnet",
+			// "task": "build ${workspaceFolder}/CRM_CMC/CRM_CMC.csproj",
+			// "file": "${workspaceFolder}/CRM_CMC/CRM_CMC.csproj",
+			// "group": "build",
+			// "problemMatcher": [],
+			"command": "dotnet",
+			"args": [
+				"build",
+				"${workspaceFolder}/CRM_CMC/CRM_CMC.csproj"
+			],
+			"problemMatcher": "$msCompile"
+		}
+	]
+}

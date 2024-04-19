@@ -1,14 +1,7 @@
-// import Ele_HomeSection from "./Ele_HomeSection.vue";
-// import Ele_LeftSideBar from "./Ele_LeftSideBar.vue";
-// import Ele_SideBarDropDown from "./Ele_SideBarDropDown.vue";
-// import Ele_Table from "./Ele_Table.vue";
-// import Ele_Table_AddEditRemove from "./Ele_Table_AddEditRemove.vue";
-// import Ele_Input_Modal from "./Ele_Input_Modal.vue";
-// import Ele_Import_Modal from "./Ele_Import_Modal.vue";
-// import Ele_Export_Modal from "./Ele_Export_Modal.vue";
 import { defineAsyncComponent } from 'vue'
+import Ele_Loading_Page from './Ele_Loading_Page.vue';
 
-
+// ansyc components
 export const HomeSection = defineAsyncComponent(() => import('./Ele_HomeSection.vue'));
 export const LeftSideBar = defineAsyncComponent(() => import('./Ele_LeftSideBar.vue'));
 export const SideBarDropDown = defineAsyncComponent(() => import('./Ele_SideBarDropDown.vue'));
@@ -20,6 +13,11 @@ export const Export_Modal = defineAsyncComponent(() => import('./Ele_Export_Moda
 export const Toast_Notification = defineAsyncComponent(() => import('./Ele_Toast_Notification.vue'));
 export const Toast_Container = defineAsyncComponent(() => import('./Ele_Toast_Container.vue'));
 export const Conform_Modal = defineAsyncComponent(() => import('./Ele_Conform_Modal.vue'));
+export const Time_Date_Panel = defineAsyncComponent(() => import('./Ele_Time_Date_Panel.vue'));
+export const Login_Panel = defineAsyncComponent(() => import('./Ele_Login_Panel.vue'));
+export const Loading_Spinner = defineAsyncComponent(() => import('./Ele_Loading_Spinner.vue'));
+// export const Loading_Page = defineAsyncComponent(() => import('./Ele_Loading_Page.vue'));
+export const Loading_Page = Ele_Loading_Page;
 
 export default {
     HomeSection,
@@ -32,5 +30,9 @@ export default {
     Export_Modal,
     Toast_Notification,
     Toast_Container,
-    Conform_Modal
+    Conform_Modal,
+    Time_Date_Panel,
+    Login_Panel,
+    Loading_Spinner,
+    Loading_Page,
 }

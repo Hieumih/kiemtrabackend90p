@@ -108,8 +108,6 @@ const readFile = async () => {
     });
 
     sumbitBtnRef.value.disabled = false;
-
-
 };
 
 const saveData = () => {

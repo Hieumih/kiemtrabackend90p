@@ -1,49 +1,52 @@
 <template>
     <div>
-        <Input_Modal ref="addModal" :columns="columns" @save="addItem" :title="'Add'" />
-        <Input_Modal ref="editModal" :columns="columns" @save="editItem" :title="'Edit'" />
-        <Import_Modal ref="importModal" :columns="columns" @save="uploadItems" @fileError="fileError"
-            :title="'Import'" />
-        <Export_Modal ref="exportModal" :title="'Export'">
-            <small>Note: Only export data in current page of this table. I will update in future</small>
-        </Export_Modal>
-        <Conform_Modal ref="conformModal" :title="'Delete'" />
+        <div>
+            <Input_Modal ref="addModal" :columns="columns" @save="addItem" :title="'Add'" />
+            <Input_Modal ref="editModal" :columns="columns" @save="editItem" :title="'Edit'" />
+            <Import_Modal ref="importModal" :columns="columns" @save="uploadItems" @fileError="fileError"
+                :title="'Import'" />
+            <Export_Modal ref="exportModal" :title="'Export'">
+                <small>Note: Only export data in current page of this table. I will update in future</small>
+            </Export_Modal>
+            <Conform_Modal ref="conformModal" :title="'Delete'" />
 
-    </div>
-    <div>
-        <button class="btn btn-primary  m-1" @click="showAddModal">Add</button>
-        <button class="btn btn-primary  m-1" @click="showImportModal">Import</button>
-        <button class="btn btn-primary  m-1" @click="showExportModal">Export</button>
-        <button class="btn btn-primary  m-1" @click="getItems">Refresh</button>
-        <button class="btn btn-primary  m-1" @click="deleteItems" :disabled="!itemsSelected.length">Delete Selected</button>
-    </div>
-    <div>
-        <input type="text" v-model="searchValue" placeholder="Search...">
-    </div>
+        </div>
+        <div>
+            <button class="btn btn-primary  m-1" @click="showAddModal">Add</button>
+            <button class="btn btn-primary  m-1" @click="showImportModal">Import</button>
+            <button class="btn btn-primary  m-1" @click="showExportModal">Export</button>
+            <button class="btn btn-primary  m-1" @click="getItems">Refresh</button>
+            <button class="btn btn-primary  m-1" @click="deleteItems" :disabled="!itemsSelected.length">Delete
+                Selected</button>
+        </div>
+        <div>
+            <input type="text" v-model="searchValue" placeholder="Search...">
+        </div>
 
-    <EasyDataTable :headers="headers" :items="items" :rows-items="[5, 10, 15, 20, 50, 100]" :rows-per-page="10"
-        :loading="loading" :server-items-length="serverItemsLength" v-model:server-options="serverOptions"
-        v-model:items-selected="itemsSelected" border-cell buttons-pagination show-index>
-        <template #item-name="{ code, name }">
-            <RouterLink :to="`${useRouter().currentRoute.value.path}/${code}`">{{ name }}</RouterLink>
-        </template>
-        <template #item-operation="item">
-            <button class="btn btn-warning m-1" @click="showEditModal(item)">Edit</button>
-            <button class="btn btn-danger  m-1" @click="deleteItem(item)">Delete</button>
-        </template>
-    </EasyDataTable>
+        <EasyDataTable :headers="headers" :items="items" :rows-items="[5, 10, 15, 20, 50, 100]" :rows-per-page="10"
+            :loading="loading" :server-items-length="serverItemsLength" v-model:server-options="serverOptions"
+            v-model:items-selected="itemsSelected" border-cell buttons-pagination show-index>
+            <template #item-name="{ code, name }">
+                <RouterLink :to="`${useRouter().currentRoute.value.path}/${code}`">{{ name }}</RouterLink>
+            </template>
+            <template #item-operation="item">
+                <button class="btn btn-warning m-1" @click="showEditModal(item)">Edit</button>
+                <button class="btn btn-danger  m-1" @click="deleteItem(item)">Delete</button>
+            </template>
+        </EasyDataTable>
+    </div>
 
 </template>
 
 <script setup>
-import { ref, watch, onMounted } from "vue";
+import { ref, watch, onMounted, defineEmits, defineProps } from "vue";
 import { useRouter } from "vue-router"
 import { debounce } from "lodash";
 import EasyDataTable from 'vue3-easy-data-table';
 import { Input_Modal, Import_Modal, Export_Modal, Conform_Modal } from "@/components/elements";
-import { getAPIUrl, childApiUrl } from '@/config.js'
+import { getAPIUrl, childApiUrl } from '~common/config.js'
 import $ from "jquery";
-import { EventBus } from '@/common'
+import { EventBus } from '~common/common'
 
 import 'vue3-easy-data-table/dist/style.css';
 

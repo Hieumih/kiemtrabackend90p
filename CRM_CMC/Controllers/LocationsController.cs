@@ -13,18 +13,18 @@ namespace CRM_CMC.Controllers
     [ApiController]
     public class LocationsController : ControllerBase
     {
-        private readonly CRM_CMCContext _context;
+        private readonly BACKEND_CRMContext _context;
 
-        public LocationsController(CRM_CMCContext context)
+        public LocationsController(BACKEND_CRMContext context)
         {
             _context = context;
         }
 
         [HttpGet]
-        public IActionResult GetLocations([FromQuery] int skip, 
-            [FromQuery] int take = 10, 
-            [FromQuery] string? search = null, 
-            [FromQuery] string? sortBy = nameof(TblLocation.LocationId),
+        public IActionResult GetLocations([FromQuery] int skip,
+            [FromQuery] int take = 10,
+            [FromQuery] string? search = null,
+            [FromQuery] string? sortBy = nameof(Location.LocationId),
             [FromQuery] string? sortType = "asc")
         {
             // Get the total number of locations
@@ -42,16 +42,23 @@ namespace CRM_CMC.Controllers
             }
 
             // Filter the data if a search term is provided
-            IQueryable<TblLocation> data = _context.TblLocations.AsQueryable();
+            IQueryable<Location> data = _context.Locations.AsQueryable();
 
             // Sort the data
-            if (sortBy == nameof(TblLocation.LocationId).ToLower()) {
+            if (sortBy == nameof(Location.LocationId).ToLower())
+            {
                 data = sortType == "asc" ? data.OrderBy(l => l.LocationId) : data.OrderByDescending(l => l.LocationId);
-            } else if (sortBy == nameof(TblLocation.Code).ToLower()) {
+            }
+            else if (sortBy == nameof(Location.Code).ToLower())
+            {
                 data = sortType == "asc" ? data.OrderBy(l => l.Code) : data.OrderByDescending(l => l.Code);
-            } else if (sortBy == nameof(TblLocation.Name).ToLower()) {
+            }
+            else if (sortBy == nameof(Location.Name).ToLower())
+            {
                 data = sortType == "asc" ? data.OrderBy(l => l.Name) : data.OrderByDescending(l => l.Name);
-            } else if (sortBy == nameof(TblLocation.Description).ToLower()) {
+            }
+            else if (sortBy == nameof(Location.Description).ToLower())
+            {
                 data = sortType == "asc" ? data.OrderBy(l => l.Description) : data.OrderByDescending(l => l.Description);
             }
 
@@ -77,11 +84,11 @@ namespace CRM_CMC.Controllers
 
         [HttpPost]
         [Route("add")]
-        public IActionResult AddLocaton([FromBody] TblLocation location)
+        public IActionResult AddLocaton([FromBody] Location location)
         {
             try
             {
-                this._context.TblLocations.Add(location);
+                this._context.Locations.Add(location);
                 this._context.SaveChanges();
                 return Ok("Location added successfully");
             }
@@ -93,11 +100,11 @@ namespace CRM_CMC.Controllers
 
         [HttpPut]
         [Route("update")]
-        public IActionResult UpdateLocation([FromBody] TblLocation location)
+        public IActionResult UpdateLocation([FromBody] Location location)
         {
             try
             {
-                this._context.TblLocations.Update(location);
+                this._context.Locations.Update(location);
                 this._context.SaveChanges();
                 return Ok("Location updated successfully");
             }
@@ -113,8 +120,8 @@ namespace CRM_CMC.Controllers
         {
             try
             {
-                var location = this._context.TblLocations.Find(id);
-                this._context.TblLocations.Remove(location);
+                var location = _context.Locations.Find(id);
+                this._context.Locations.Remove(location);
                 this._context.SaveChanges();
                 return Ok("Location deleted successfully");
             }
@@ -130,7 +137,7 @@ namespace CRM_CMC.Controllers
         {
             try
             {
-                var location = this._context.TblLocations.Find(id);
+                var location = this._context.Locations.Find(id);
                 return Ok(location);
             }
             catch (System.Exception ex)
@@ -141,12 +148,12 @@ namespace CRM_CMC.Controllers
 
         [HttpPost]
         [Route("upload")]
-        public IActionResult UploadLocations([FromBody]List<TblLocation> locations)
+        public IActionResult UploadLocations([FromBody] List<Location> locations)
         {
             try
             {
                 locations.ForEach(l => l.LocationId = 0);
-                this._context.TblLocations.AddRange(locations);
+                this._context.Locations.AddRange(locations);
                 this._context.SaveChanges();
                 return Ok("Locations uploaded successfully");
             }
@@ -154,24 +161,24 @@ namespace CRM_CMC.Controllers
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
-        } 
+        }
 
         [HttpDelete]
         [Route("deleteMultiple")]
-        public IActionResult DeleteMultipleLocations([FromBody] List<TblLocation> locations)
+        public IActionResult DeleteMultipleLocations([FromBody] List<Location> locations)
         {
             foreach (var location in locations)
             {
-                var entity = this._context.TblLocations.Find(location.LocationId);
+                var entity = this._context.Locations.Find(location.LocationId);
                 if (entity != null)
                 {
-                    this._context.TblLocations.Remove(entity);
+                    _context.Locations.Remove(entity);
                 }
             }
             this._context.SaveChanges();
             return Ok("Locations deleted successfully");
         }
 
-        
+
     }
 }

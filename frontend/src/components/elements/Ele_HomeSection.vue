@@ -3,7 +3,7 @@
         <div class="home-content">
             <i @click="closeSidebar" class="bi bi-list menu"></i>
             <span class="text" ref="path">
-                <!-- modify this -->
+                Dashboard
             </span>
         </div>
         <div class="container-custom">

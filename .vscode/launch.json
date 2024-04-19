@@ -1,0 +1,42 @@
+{
+    "configurations": [
+        {
+            "name": "Backend",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build Backend",
+            "program": "${workspaceFolder}/CRM_CMC/obj/Debug/net6.0/CRM_CMC.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}",
+            "stopAtEntry": false,
+            "serverReadyAction": {
+                "action": "openExternally",
+                "pattern": "\\bNow listening on:\\s+(https?://\\S+)"
+            },
+            "env": {
+                "ASPNETCORE_ENVIRONMENT": "Development"
+            },
+            "sourceFileMap": {
+                "/Views": "${workspaceFolder}/Views"
+            }
+        },
+
+
+        {
+            "command": "cd frontend; npm run dev",
+            "name": "FrontEnd",
+            "request": "launch",
+            "type": "node-terminal"
+        },
+
+    ],
+    "compounds": [
+        {
+            "name": "DEV MODE",
+            "configurations": [
+                "FrontEnd",
+                "Backend",
+            ]
+        }
+    ]
+}

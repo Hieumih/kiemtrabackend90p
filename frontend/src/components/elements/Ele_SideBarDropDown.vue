@@ -1,37 +1,15 @@
 <template>
-    <!-- <li :class="{ 'close': isClosed }" ref="menu">
-        <div class="icon-link">
-            <router-link :to="link" @click="modifyPath(name)">
-                <i :class="icon"></i>
-                <span class="link-name">{{ name }}</span>
-            </router-link>
-            <template v-if="items">
-                <i class="bi bi-caret-down-fill arrow" ref="arrow"></i>
-            </template>
-        </div>
-        <ul :class="'sub-menu' + (items ? ' ' : '')">
-            <li>
-                <router-link class="link-name" :to="link"  @click="modifyPath(name)">{{ name }}</router-link>
-                <template v-for="(item, index) in items" :key="index">
-                    <router-link :to="link + item.link" @click="modifyPath(item)">
-                        {{ item.text }}
-                    </router-link>
-                </template>
-            </li>
-        </ul>
-    </li> -->
-
     <li :class="{ 'close': isClosed }" ref="menu">
         <div class="icon-link">
-            <router-link :to="url">
-                <i :class="icon"></i>
-                <span class="link-name">{{ title }}</span>
+            <router-link :to="url" :class="{'link': child.length != 0}">
+                <i :class="icon" class=""></i>
+                <span class="link-name" ref="linkNameRef"><div class="text" ref="textRef">{{ title }}</div></span>
             </router-link>
-            <template v-if="child">
+            <template v-if="child.length != 0">
                 <i class="bi bi-caret-down-fill arrow" ref="arrow"></i>
             </template>
         </div>
-        <ul :class="'sub-menu' + (child ? ' ' : '')">
+        <ul :class="'sub-menu'">
             <li>
                 <router-link class="link-name" :to="url" >{{ title }}</router-link>
                 <template v-for="(item, index) in child" :key="index">
@@ -76,17 +54,22 @@ const emit = defineEmits(['modifyPath']);
 const menu = ref(null);
 const arrow = ref(null);
 
-const closeSidebar = () => {
-    console.log('Child method called from parent');
-    menu.value.classList.toggle('close');
-};
+const linkNameRef = ref(null);
+const textRef = ref(null);
 
 onMounted(() => {
-    console.log(props.child);
+    import.meta.env.DEV && console.log(props.child);
     if (arrow.value) {
         arrow.value.addEventListener('click', (e) => {
             arrow.value.parentElement.parentElement.classList.toggle('show-menu');
         });
+    }
+    // get size of linkName and ref
+    const linkNameWidth = linkNameRef.value.offsetWidth;
+    const textWidth = textRef.value.offsetWidth;
+    // console.log(linkNameWidth, textWidth, props.title);
+    if (textWidth > linkNameWidth) {
+        linkNameRef.value.classList.add('long');
     }
 });
 </script>
@@ -116,6 +99,11 @@ li .icon-link {
 
 li.close .icon-link {
     display: block;
+}
+
+li .icon-link .link {
+    width: 70.5%;
+    flex: 0 0 auto;
 }
 
 li i {
@@ -160,12 +148,23 @@ li a .link-name {
     font-size: 18px;
     font-weight: 400;
     color: #fff;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+li a .link-name .text {
+    display: inline-block;
+    white-space: nowrap;
+    overflow-x: visible ;
+}
+
+li a .link-name.long:hover .text {
+    animation: move_text 5s linear infinite;
 }
 
 li.close a .link-name {
-    opacity: 0;
+    /* opacity: 0; */
     pointer-events: none;
-    white-space: nowrap;
 }
 
 li .sub-menu {
@@ -240,5 +239,28 @@ li .sub-menu.blank {
 li:hover .sub-menu.blank {
     top: 50%;
     transform: translateY(-50%);
+}
+
+@keyframes move_text {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-100%);
+    }
+}
+
+@keyframes container-down {
+    0% {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    
 }
 </style>

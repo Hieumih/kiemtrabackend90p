@@ -8,10 +8,12 @@
         'warning': toast_type === 'warning',
         'info': toast_type === 'info',
     }">
-                    <i class="bi bi-check-circle" v-if="toast_type === 'success'"></i>
-                    <i class="bi bi-x-circle" v-if="toast_type === 'error'"></i>
-                    <i class="bi bi-exclamation-circle" v-if="toast_type === 'warning'"></i>
-                    <i class="bi bi-info-circle" v-if="toast_type === 'info'"></i>
+                    <i class="fa-solid fa-circle-check" v-if="toast_type === 'success'"></i>
+                    <i class="fa-solid fa-circle-xmark" v-if="toast_type === 'error'"></i>
+                    <i class="fa-solid fa-circle-exclamation" v-if="toast_type === 'warning'"></i>
+                    <i class="fa-solid fa-circle-info" v-if="toast_type === 'info'"></i>
+
+
                 </div>
                 <div class="toast-notification__content__message">
                     <p>{{ message }}</p>
@@ -31,8 +33,11 @@
 </template>
 
 <script setup>
-import { ref, onMounted, watch, defineProps } from 'vue';
+import { ref, onMounted, watch, defineProps, defineEmits } from 'vue';
+import '@fortawesome/fontawesome-free/css/all.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
+
+const emit = defineEmits(['close']);
 
 const toastRef = ref(null);
 
@@ -43,27 +48,32 @@ const props = defineProps({
     },
     toast_type: {
         type: String,
-        default: 'error'
+        default: 'info'
     }
 });
 
-const closeToast = () => {
-    toastRef.value.classList.remove('show');
-};
 
-onMounted(() => {
-    toastRef.value.classList.add('show');
-});
+const closeToast = () => {
+    emit('close');
+};
 
 </script>
 
 <style scoped>
 .toast-notification {
-    display: block;
+    display: all;
     list-style: none;
     border-radius: 5px;
     background-color: #11101d;
-    animation: appear 0.5s;
+    /* animation: appear 0.5s; */
+    overflow: hidden;
+    width: 300px;
+    pointer-events: all;
+}
+
+.toast-notification.close {
+    /* animation: disappear 0.5s; */
+    display: none;
 }
 
 .toast-notification__container {
@@ -146,7 +156,7 @@ onMounted(() => {
     }
 }
 
-@keyframes appear {
+/* @keyframes appear {
     0% {
         transform: translateX(100%);
     }
@@ -154,6 +164,6 @@ onMounted(() => {
     100% {
         transform: translateX(0);
     }
-}
+} */
 
 </style>
