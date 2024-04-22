@@ -1,9 +1,12 @@
 # LƯU Ý
-## Cài đặt SQL
+## Cài đặt SQL cho NHÀ PHÁT TRIÊN
 - Mở VSCODE 2022:
-    - xóa mirgation
-    - sử dụng `add-migration`
+    - Đổi tên `appsettings.Development_Example.json` thành `appsettings.Development.json`
+    - Thêm `connection-string ` của bạn vào đó
+    - Mở package manager console
+    - `add-migration [TÊN CỦA THAY ĐỔI]`
     - `update-database`
+
 ## THÊM USER VÀO CSDL
 - Cần thêm tài khoản ở Swagger
     - Thêm ROLE bằng cổng 'seed-role'
