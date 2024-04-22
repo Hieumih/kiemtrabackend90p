@@ -3,3 +3,4 @@ bin
 obj/debug
 obj/release
 Migrations
+appsettings.Development.json
