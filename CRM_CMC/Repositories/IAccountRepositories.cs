@@ -10,11 +10,19 @@ namespace CRM_CMC.Repositories
         public Task<IdentityResult> SignUpAsync(SignUpModel model);
         public Task<JwtSecurityToken?> SignInAsync(SignInModel model);
 
+        // Role
         public Task<bool> SeedRole();
+        public Task<IEnumerable<string>> ListRole();
+        public Task<bool> AddRole(string role);
+        public Task<bool> AddRoleClaim(string role, string claim);
+        public Task<bool> RemoveRoleClaim(string role, string claim);
+        public Task<IEnumerable<string>?> GetRoleClaim(string role);
 
-        public Task<(string, bool)> SetRole(Guid userID, string role);
-
-        public Task<IEnumerable<string>?> GetRole(Guid userID);
-
+        // user
+        public Task<IEnumerable<string>?> GetUserRole(Guid userID);
+        public Task<(string, bool)> AddUserToRole(Guid userID, string role);
+        public Task<bool> AddUserClaim(Guid userID, string calim);
+        public Task<bool> RemoveUserClaim(Guid userID, string claim);
+        public Task<IEnumerable<string>?> GetUserClaim(Guid userID);
     }
 }

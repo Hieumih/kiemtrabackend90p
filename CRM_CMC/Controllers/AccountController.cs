@@ -25,19 +25,6 @@ namespace CRM_CMC.Controllers
             return Ok("Authorized");
         }
 
-        [HttpPost("signup")]
-        public async Task<IActionResult> SignUpAsync(SignUpModel model)
-        {
-            var result = await _accountRepositories.SignUpAsync(model);
-
-            if (result.Succeeded)
-            {
-                return Ok("User created successfully");
-            }
-
-            return Unauthorized(result.Errors);
-        }
-
         [HttpPost("login")]
         public async Task<IActionResult> SignInAsync(SignInModel model)
         {
@@ -53,7 +40,20 @@ namespace CRM_CMC.Controllers
             });
         }
 
-        // [Authorize(Roles = $"{StaticUserRole.Admin}, {StaticUserRole.Staff}")]
+        [HttpPost("signup")]
+        public async Task<IActionResult> SignUpAsync(SignUpModel model)
+        {
+            var result = await _accountRepositories.SignUpAsync(model);
+
+            if (result.Succeeded)
+            {
+                return Ok("User created successfully");
+            }
+
+            return Unauthorized(result.Errors);
+        }
+
+        [Authorize(Roles = StaticUserRole.Admin)]
         [HttpPost("seed-role")]
         public async Task<IActionResult> SeedRole()
         {
@@ -67,12 +67,96 @@ namespace CRM_CMC.Controllers
             return BadRequest("Roles seeding failed");
         }
 
-        //[Authorize(Roles = StaticUserRole.Admin)]
-        // [Authorize(Roles = "Admin")]
-        [HttpPost("set-role")]
-        public async Task<IActionResult> SetRole(Guid userID, string role)
+        [Authorize(Roles = StaticUserRole.Admin)]
+        [HttpGet("list-role")]
+        public async Task<IActionResult> ListRole()
         {
-            var result = await _accountRepositories.SetRole(userID, role);
+            var result = await _accountRepositories.ListRole();
+
+            if (result != null)
+            {
+                return Ok(result);
+            }
+
+            return BadRequest("Roles not found");
+        }
+
+        [Authorize(Roles = StaticUserRole.Admin)]
+        [HttpPost("add-role")]
+        public async Task<IActionResult> AddRole(string role)
+        {
+            var result = await _accountRepositories.AddRole(role);
+
+            if (result)
+            {
+                return Ok("Role added successfully");
+            }
+
+            return BadRequest("Role already exists");
+        }
+
+        [Authorize(Roles = StaticUserRole.Admin)]
+        [HttpPost("add-role-claim")]
+        public async Task<IActionResult> AddRoleClaim(string role, string permission)
+        {
+            var result = await _accountRepositories.AddRoleClaim(role, permission);
+
+            if (result)
+            {
+                return Ok("Claim added successfully");
+            }
+
+            return BadRequest("Role or Claim not found");
+        }
+
+        [Authorize(Roles = StaticUserRole.Admin)]
+        [HttpPost("remove-role-claim")]
+        public async Task<IActionResult> RemoveRoleClaim(string role, string permission)
+        {
+            var result = await _accountRepositories.RemoveRoleClaim(role, permission);
+
+            if (result)
+            {
+                return Ok("Claim removed successfully");
+            }
+
+            return BadRequest("Role or Claim not found");
+        }
+
+        [Authorize(Roles = StaticUserRole.Admin)]
+        [HttpGet("get-role-claim")]
+        public async Task<IActionResult> GetRoleClaim(string role)
+        {
+            var result = await _accountRepositories.GetRoleClaim(role);
+
+            if (result != null)
+            {
+                return Ok(result);
+            }
+
+            return BadRequest("Role not found");
+        }
+
+
+        [Authorize]
+        [HttpGet("get-user-role")]
+        public async Task<IActionResult> GetUserRole(Guid userID)
+        {
+            var result = await _accountRepositories.GetUserRole(userID);
+
+            if (result != null)
+            {
+                return Ok(result);
+            }
+
+            return BadRequest("User not found");
+        }
+
+        [Authorize(Roles = StaticUserRole.Admin)]
+        [HttpPost("add-user-role")]
+        public async Task<IActionResult> AddUserRole(Guid userID, string role)
+        {
+            var result = await _accountRepositories.AddUserToRole(userID, role);
 
             if (result.Item2)
             {
@@ -82,11 +166,39 @@ namespace CRM_CMC.Controllers
             return BadRequest(result.Item1);
         }
 
-        [Authorize]
-        [HttpGet("get-role")]
-        public async Task<IActionResult> GetRole(Guid userID)
+        [Authorize(Roles = StaticUserRole.Admin)]
+        [HttpPost("add-user-claim")]
+        public async Task<IActionResult> AddUserClaim(Guid userID, string claim)
         {
-            var result = await _accountRepositories.GetRole(userID);
+            var result = await _accountRepositories.AddUserClaim(userID, claim);
+
+            if (result)
+            {
+                return Ok("Claim added successfully");
+            }
+
+            return BadRequest("User not found");
+        }
+
+        [Authorize(Roles = StaticUserRole.Admin)]
+        [HttpPost("remove-user-claim")]
+        public async Task<IActionResult> RemoveUserClaim(Guid userID, string claim)
+        {
+            var result = await _accountRepositories.RemoveUserClaim(userID, claim);
+
+            if (result)
+            {
+                return Ok("Claim removed successfully");
+            }
+
+            return BadRequest("User not found");
+        }
+
+        [Authorize]
+        [HttpGet("get-user-claim")]
+        public async Task<IActionResult> GetUserClaim(Guid userID)
+        {
+            var result = await _accountRepositories.GetUserClaim(userID);
 
             if (result != null)
             {
@@ -95,6 +207,7 @@ namespace CRM_CMC.Controllers
 
             return BadRequest("User not found");
         }
+
 
 
     }

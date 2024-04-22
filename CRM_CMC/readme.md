@@ -10,6 +10,19 @@
 
 # Cập nhật
 
+
+## build 6
+- Thêm chức năng phân quyền
+    - Để thêm role vào user, dùng cổng 'add-user-role'
+    - Để thêm role, dùng cổng 'add-role'
+    - Để xem role, dùng cổng 'list-role'
+    - Để thêm quyền vào role, dùng cổng 'add-role-claim'
+    - Để xem quyền của role, dùng cổng 'get-role-claim'
+    - Để thêm quyền của user , dùng cổng 'add-user-claim'
+    - Để xem role của user, dùng cổng 'get-user-role'
+- Thêm chức năng xác thực người dùng
+- Thêm chức năng đăng nhập
+
 ## build 5
 - Tùy biến xác thực người dùng
 

@@ -4,6 +4,7 @@ using CRM_CMC.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CRM_CMC.Migrations
 {
     [DbContext(typeof(BACKEND_CRMContext))]
-    partial class BACKEND_CRMContextModelSnapshot : ModelSnapshot
+    [Migration("20240422031647_v3")]
+    partial class v3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -669,9 +671,14 @@ namespace CRM_CMC.Migrations
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
 
-                    b.Property<string>("RoleName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<bool>("canDelete")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("canEdit")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("canView")
+                        .HasColumnType("bit");
 
                     b.HasKey("Id");
 

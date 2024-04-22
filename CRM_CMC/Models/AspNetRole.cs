@@ -15,9 +15,7 @@ namespace CRM_CMC.Models
         public string? Name { get; set; }
         public string? NormalizedName { get; set; }
         public string? ConcurrencyStamp { get; set; }
-
         public virtual ICollection<AspNetRoleClaim> AspNetRoleClaims { get; set; }
-
         public virtual ICollection<AspNetUser> Users { get; set; }
     }
 }

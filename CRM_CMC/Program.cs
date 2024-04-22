@@ -52,7 +52,7 @@ builder.Services.AddDbContext<BACKEND_CRMContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("CRM")));
 
 builder.Services
-    .AddIdentity<UserInfo, IdentityRole>()
+    .AddIdentity<UserInfo, UserRole>()
     .AddEntityFrameworkStores<BACKEND_CRMContext>()
     .AddDefaultTokenProviders();
 
