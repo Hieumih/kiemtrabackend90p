@@ -120,10 +120,10 @@ onMounted(() => {
     align-items: center;
     justify-content: center;
     margin: 10px;
-    border: 1px solid #000;
+    border: 1px solid;
     border-radius: 25px;
     padding: 5px;
-
+    overflow: hidden;
 }
 
 .form-container .form-input:focus-within {
@@ -138,7 +138,7 @@ onMounted(() => {
 .form-container .form-input .input {
     width: 100%;
     padding: 5px;
-    border: 1px solid #000;
+    border: 1px solid;
     border: none;
     outline: none;
     background: transparent;
@@ -161,7 +161,6 @@ onMounted(() => {
 
 .form-container .forgotPass small a {
     text-decoration: none;
-    color: #000;
 }
 
 .form-container .button {
@@ -171,13 +170,14 @@ onMounted(() => {
 }
 
 .form-container .button button {
-    padding: 5px 10px;
-    border: 1px solid #000;
+    padding: 10px 10px;
+    border: 1px solid;
     border-radius: 25px;
     background: #3f51b5;
     color: #fff;
     cursor: pointer;
     outline: none;
+    min-width: 100px;
 }
 
 .form-container .button .check-box {
@@ -209,7 +209,7 @@ onMounted(() => {
     justify-content: center;
     margin: 10px;
     padding: 5px;
-    border: 1px solid #000;
+    border: 1px solid;
     border-radius: 25px;
 }
 
@@ -221,5 +221,14 @@ onMounted(() => {
 .form-container .login-method .social-media span {
     /* font-size: 12px; */
     margin-right: 10px;
+}
+
+/* transparent backgroud in auto filter like save password */
+.form-container .form-input input:-webkit-autofill,
+.form-container .form-input input:-webkit-autofill:hover,
+.form-container .form-input input:-webkit-autofill:focus,
+.form-container .form-input input:-webkit-autofill:active {
+    transition: background-color 5000s ease-in-out 0s;
+    -webkit-text-fill-color: #fff !important;
 }
 </style>

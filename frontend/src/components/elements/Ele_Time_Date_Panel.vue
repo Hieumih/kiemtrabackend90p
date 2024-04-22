@@ -1,8 +1,8 @@
 <template>
     <div class="time">
         <div class="clock">
-            <span class="hour" ref="hourRef">00</span> : 
-            <span class="minute" ref="minuteRef">00</span> : 
+            <span class="hour" ref="hourRef">00</span> :
+            <span class="minute" ref="minuteRef">00</span> :
             <span class="second" ref="secondRef">00</span>
         </div>
         <div class="date-time mb-4 " ref="date-Time">
@@ -64,12 +64,12 @@ const timeZoneSelected = ref(moment.tz.guess());
 const change_clockTime = () => {
     // use time zone
     const time = moment().tz(timeZoneSelected.value);
-    if(hourRef.value) hourRef.value.innerText = time.format('HH');
-    if(minuteRef.value) minuteRef.value.innerText = time.format('mm');
-    if(secondRef.value) secondRef.value.innerText = time.format('ss');
-    if(dayRef.value) dayRef.value.innerText = time.format('DD');
-    if(monthRef.value) monthRef.value.innerText = time.format('MM');
-    if(yearRef.value) yearRef.value.innerText = time.format('YYYY');
+    if (hourRef.value) hourRef.value.innerText = time.format('HH');
+    if (minuteRef.value) minuteRef.value.innerText = time.format('mm');
+    if (secondRef.value) secondRef.value.innerText = time.format('ss');
+    if (dayRef.value) dayRef.value.innerText = time.format('DD');
+    if (monthRef.value) monthRef.value.innerText = time.format('MM');
+    if (yearRef.value) yearRef.value.innerText = time.format('YYYY');
 }
 
 onMounted(() => {
@@ -81,7 +81,7 @@ onMounted(() => {
 </script>
 
 
-<style scoped>
+<style scoped lang="scss">
 .time {
     /* background: #fff; */
     width: 100%;
@@ -91,55 +91,73 @@ onMounted(() => {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-}
-.time .clock {
-    font-size: 70px;
-    font-weight: 450;
-}
 
-.time .date-time {
-    display: flex;
-    justify-content: space-around;
-    width: 100%;
-    margin-top: 20px;
-}
-.time .date-time .date {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 33.33%;
-}
-.main .time .date-time .date .text {
-    font-size: 20px;
-    font-weight: 400;
-}
-.time .date-time .date .number {
-    font-size: 50px;
-    font-weight: 450;
-}
-.time .date-time .date.month {
-    border-left: 1px solid #000;
-    border-right: 1px solid #000;
+    .clock {
+        font-size: 70px;
+        font-weight: 450;
+    }
 
-}
-.time .time-zone {
-    margin-top: 20px;
-}
-.time .time-zone .select-zone {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #000;
-    border-radius: 5px;
-    background: transparent;
-    /* font-size: 20px;
-    font-weight: 450; */
-    cursor: pointer;
-    outline: none;
-    appearance: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    text-align: center;
+    .date-time {
+        display: flex;
+        justify-content: space-around;
+        width: 100%;
+        margin-top: 20px;
 
-}
+        .date {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 33.33%;
 
+            .text {
+                font-size: 20px;
+                font-weight: 400;
+            }
+        }
+
+        .number {
+            font-size: 50px;
+            font-weight: 450;
+        }
+
+        .date.month {
+            border-left: 1px solid;
+            border-right: 1px solid;
+        }
+    }
+
+    .time-zone {
+        margin-top: 20px;
+
+        .select-zone {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid;
+            border-radius: 5px;
+            background: transparent;
+            cursor: pointer;
+            outline: none;
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            text-align: center;
+
+            option {
+                padding: 10px;
+                border: 1px solid;
+                border-radius: 5px;
+                background: #fff;
+                cursor: pointer;
+                outline: none;
+                appearance: none;
+                -webkit-appearance: none;
+                -moz-appearance: none;
+                text-align: center;
+                color: #000;
+
+            }
+        }
+
+    }
+}
 </style>

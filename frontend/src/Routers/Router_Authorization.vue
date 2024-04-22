@@ -1,11 +1,14 @@
 <template>
     <div class="main">
         <div class="panel">
-            <Time_Date_Panel />
+            <Time_Date_Panel class="time-panel" />
         </div>
         <div class="panel">
-            <h2>CRM APP</h2><br>
-            <Login_Panel @login="login" />
+            <div class="logo-container">
+                <img :src="`./img/loginLogo.svg`" alt="" class="logo">
+
+            </div>
+            <Login_Panel @login="login" class="auth_panel" />
         </div>
     </div>
 </template>
@@ -25,7 +28,7 @@ const login = (data) => {
         if (result) {
             // go back history if the page defined in router
             const redirectedFrom = route?.redirectedFrom?.fullPath ?? false;
-            console.log('redirect:',redirectedFrom)
+            console.log('redirect:', redirectedFrom)
             if (redirectedFrom) {
                 router.push(redirectedFrom);
             } else {
@@ -40,26 +43,84 @@ const login = (data) => {
 
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+$currentColor : white ;
+
+
 .main {
-    background: #e4e9f7;
+    /* background: #e4e9f7; */
+    background-image: url('./img/login_background.jpg');
     width: 100%;
     height: 100vh;
     overflow: hidden;
     display: flex;
     align-items: center;
     justify-content: center;
+
+    .panel {
+        width: 40%;
+        min-height: 500px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 3px;
+        overflow: hidden;
+        flex-direction: column;
+        background-color: rgba(7, 5, 5, 0.192);
+
+        .logo-container {
+            height: 150px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 10px;
+            overflow: hidden;
+
+            .logo {
+                width: 250px;
+                height: 250px;
+                object-fit: cover;
+                /* white */
+                /* filter: invert(100%); */
+            }
+        }
+    }
 }
 
-.main .panel {
-    background: #fff;
-    width: 40%;
-    min-height: 500px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 3px;
-    overflow: hidden;
-    flex-direction: column;
+
+.time-panel:deep() {
+    color: $currentColor ;
+    border-color: $currentColor ;
+
+    .date-time .date.month {
+        border-left: 1px solid $currentColor  ;
+        border-right: 1px solid $currentColor  ;
+    }
+
+    .time-zone .select-zone {
+        border: 1px solid $currentColor  ;
+        color: $currentColor ;
+    }
+}
+
+.auth_panel:deep() {
+    color: $currentColor ;
+
+    .form-input {
+        border-color: $currentColor ;
+
+        .input {
+            color: $currentColor ;
+            caret-color: rgb(250, 250, 250);
+        }
+
+        .input::placeholder {
+            color: rgba(255, 255, 255, 0.445);
+        }
+    }
+
+    .forgotPass small a {
+        color: $currentColor ;
+    }
 }
 </style>

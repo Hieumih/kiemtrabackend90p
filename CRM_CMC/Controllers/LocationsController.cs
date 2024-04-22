@@ -115,20 +115,24 @@ namespace CRM_CMC.Controllers
         }
 
         [HttpDelete]
-        [Route("delete")]
-        public IActionResult DeleteLocation(int id)
+        [Route("deleteOne")]
+        public IActionResult DeleteLocation([FromBody] Location location)
         {
             try
             {
-                var location = _context.Locations.Find(id);
-                this._context.Locations.Remove(location);
-                this._context.SaveChanges();
+                var entity = this._context.Locations.Find(location.LocationId);
+                if (entity != null)
+                {
+                    _context.Locations.Remove(entity);
+                    this._context.SaveChanges();
+                }
                 return Ok("Location deleted successfully");
             }
             catch (System.Exception ex)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
+
         }
 
         [HttpGet]
@@ -147,7 +151,7 @@ namespace CRM_CMC.Controllers
         }
 
         [HttpPost]
-        [Route("upload")]
+        [Route("import")]
         public IActionResult UploadLocations([FromBody] List<Location> locations)
         {
             try
@@ -164,7 +168,7 @@ namespace CRM_CMC.Controllers
         }
 
         [HttpDelete]
-        [Route("deleteMultiple")]
+        [Route("deleteRange")]
         public IActionResult DeleteMultipleLocations([FromBody] List<Location> locations)
         {
             foreach (var location in locations)

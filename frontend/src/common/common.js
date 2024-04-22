@@ -3,6 +3,10 @@ import moment from 'moment-timezone';
 
 export const EventBus = mitt();
 
+export const addNotification = (message, toast_type) => {
+    EventBus.emit('addNotification', { message, toast_type });
+}
+
 export class url_link_icon {
     constructor(url, title, icon, child = []) {
         this.url = url;

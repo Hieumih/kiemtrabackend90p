@@ -12,7 +12,8 @@ const orderUrl = new url_link_icon("/prder", lang.order, "fa-solid fa-basket-sho
 const supportUrl = new url_link_icon("/support", lang.support, "bi bi-question-circle");
 const interactionUrl = new url_link_icon("/interaction", lang.interaction, "bi bi-chat-left-text");
 const scheduleUrl = new url_link_icon("/schedule", lang.schedule, "fa-solid fa-calendar-days");
-// const projectUrl = new url_link_icon("/project", lang.project, "fa-solid fa-diagram-project");
+const projectUrl = new url_link_icon("/project", lang.project, "fa-solid fa-diagram-project");
+const phoneCallUrl = new url_link_icon("/phone-call", lang.phoneCall, "fa-solid fa-phone");
 
 // const locationManagerUrl = new url_link_icon("/manager", "Manager", "bi bi-geo-alt");
 // locationUrl.child.push(locationManagerUrl);
@@ -20,13 +21,14 @@ const scheduleUrl = new url_link_icon("/schedule", lang.schedule, "fa-solid fa-c
 
 export const url_paths = [
     dashboardUrl,
-    userUrl,
+    // userUrl,
     customerUrl,
-    productUrl,
-    orderUrl,
+    // productUrl,
+    // orderUrl,
     locationUrl,
-    supportUrl,
-    interactionUrl,
+    // supportUrl,
+    // interactionUrl,
     scheduleUrl,
     // projectUrl,
+    phoneCallUrl
 ]

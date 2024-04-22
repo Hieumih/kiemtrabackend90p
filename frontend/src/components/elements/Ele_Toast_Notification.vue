@@ -12,8 +12,6 @@
                     <i class="fa-solid fa-circle-xmark" v-if="toast_type === 'error'"></i>
                     <i class="fa-solid fa-circle-exclamation" v-if="toast_type === 'warning'"></i>
                     <i class="fa-solid fa-circle-info" v-if="toast_type === 'info'"></i>
-
-
                 </div>
                 <div class="toast-notification__content__message">
                     <p>{{ message }}</p>
@@ -28,7 +26,8 @@
         'toast-notification__cooldown': true, 'error': toast_type === 'error',
         'warning': toast_type === 'warning',
         'info': toast_type === 'info',
-    }"></div>
+    }">
+        </div>
     </li>
 </template>
 
@@ -59,7 +58,7 @@ const closeToast = () => {
 
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .toast-notification {
     display: all;
     list-style: none;
@@ -80,19 +79,21 @@ const closeToast = () => {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     padding: 10px 20px;
     display: grid;
+
+    .toast-notification__content__message {
+        width: 100%;
+
+        p {
+            color: #fff;
+            font-size: 14px;
+            margin: 0;
+            width: 200px;
+            word-wrap: break-word;
+        }
+    }
 }
 
-.toast-notification__container .toast-notification__content__message {
-    width: 100%;
-}
 
-.toast-notification__container .toast-notification__content__message p {
-    color: #fff;
-    font-size: 14px;
-    margin: 0;
-    width: 200px;
-    word-wrap: break-word;
-}
 
 .toast-notification__content__icon {
     color: #28a745;
@@ -165,5 +166,4 @@ const closeToast = () => {
         transform: translateX(0);
     }
 } */
-
 </style>

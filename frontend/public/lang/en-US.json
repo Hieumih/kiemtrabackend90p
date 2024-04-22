@@ -12,5 +12,6 @@
     "support": "support",
     "interaction": "interaction history",
     "schedule": "schedule",
-    "project": "project"
+    "project": "project",
+    "phoneCall" : "phone call"
 }

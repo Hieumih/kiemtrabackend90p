@@ -13,7 +13,15 @@
 # Chỉnh sửa gần đây
 
 ## build 10
-1. Thêm trang lịch
+1. Thay đổi một số icon
+1. Sửa lỗi:
+    - Dashboard: `Uncaught (in promise) TypeError: Cannot set properties of null (setting '__draggable_context')`
+
+## build 10
+1. BETA: Thêm trang lịch
+    - Thêm giao diện cho trang lịch
+    - Chưa có thông tin gửi đến server
+    - Có thể thêm lịch bằng cách ấn vào ô lịch hoặc di chuột vào đó
 
 ## build 9
 1. Thêm tính năng đăng nhập

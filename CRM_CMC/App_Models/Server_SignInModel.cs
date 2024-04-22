@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace CRM_CMC.Models
+namespace CRM_CMC.App_Models
 {
     public class SignInModel
     {

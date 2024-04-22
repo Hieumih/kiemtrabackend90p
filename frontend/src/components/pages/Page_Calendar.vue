@@ -109,7 +109,7 @@ const viewActve = (e) => {
     });
     e.target.classList.add('active');
     dateRef.value = calendarApi.value.view.title;
-    
+
 };
 
 const viewMouth = (e) => {
@@ -151,18 +151,23 @@ watch(calenderDivRef, (newVal, oldVal) => {
 
 </script>
 
-<style scoped>
-.calendar {
-    margin: 16px;
+<style scoped lang="scss">
+.calendar:deep() {
+    padding: 16px;
     width: 80%;
     overflow: hidden;
-    height: calc(100% - 16px * 2);
+    height: calc(100%);
+
+    .fc-col-header-cell-cushion,
+    .fc-daygrid-day-number {
+        text-decoration: none;
+        color: #11101d;
+    }
 }
 
 .calendar-container {
     max-height: calc(90% - 16px * 2);
     overflow-y: auto;
-
 }
 
 .calendar-navigator {
@@ -179,53 +184,54 @@ watch(calenderDivRef, (newVal, oldVal) => {
     justify-content: center;
     align-items: center;
     list-style: none;
-}
 
-.button-list ul {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-}
+    ul {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        list-style: none;
+        margin: 0;
+        padding: 0;
 
-.button-list ul li button {
-    /* margin: 0 8px; */
-    padding: 8px 16px;
-    border: 1px solid #000;
-    /* border-radius: 4px; */
-    background-color: #fff;
-    cursor: pointer;
-}
+        li {
+            button {
+                /* margin: 0 8px; */
+                padding: 8px 16px;
+                border: 1px solid #000;
+                /* border-radius: 4px; */
+                background-color: #fff;
+                cursor: pointer;
+            }
 
-.button-list ul li button:hover {
-    background-color: #f0f0f0;
+            button:hover {
+                background-color: #f0f0f0;
+            }
 
-}
+            button.start {
+                /* border-right-color: transparent; */
+                border-top-left-radius: 4px;
+                border-bottom-left-radius: 4px;
+            }
 
-.button-list ul li button.start {
-    /* border-right-color: transparent; */
-    border-top-left-radius: 4px;
-    border-bottom-left-radius: 4px;
-}
+            button.mid {
+                border-left-color: transparent;
+                /* border-right-color: transparent; */
+            }
 
-.button-list ul li button.mid {
-    border-left-color: transparent;
-    /* border-right-color: transparent; */
+            button.end {
+                border-left-color: transparent;
+                border-top-right-radius: 4px;
+                border-bottom-right-radius: 4px;
+            }
+
+            button.active {
+                background-color: #f0f0f0;
+            }
+        }
+    }
 }
 
 /* .button-list ul li button.mid:focus {
     pointer-events: none;
 } */
-
-.button-list ul li button.end {
-    border-left-color: transparent;
-    border-top-right-radius: 4px;
-    border-bottom-right-radius: 4px;
-}
-
-.button-list.view ul li button.active {
-    background-color: #f0f0f0;
-}
 </style>

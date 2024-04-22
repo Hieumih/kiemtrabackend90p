@@ -20,7 +20,7 @@ const notifications = ref([]);
 
 // notifications.value.push({
 //     id: Date.now(),
-//     message: 'Welcome to the app! 🎉',
+//     message: 'Welcome to the app! 🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉',
 //     toast_type: 'info'
 // });
 

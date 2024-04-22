@@ -41,67 +41,71 @@ watch(() => route.path, (path) => {
 
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .home-section {
     position: relative;
     background: #e4e9f7;
     height: 100vh;
     left: 260px;
     width: calc(100% - 260px);
-    /* left: 78px;
-        width: calc(100% - 78px); */
+    //left: 78px;
+    //width: calc(100% - 78px);
     transition: all 0.5s ease;
+
+    .home-content {
+        height: 60px;
+        display: flex;
+        align-items: center;
+
+        .menu,
+        .text {
+            color: #11101d;
+            font-size: 35px;
+            // transition: all 0.5s ease; 
+        }
+
+        .menu {
+            margin: 0 15px;
+            cursor: pointer;
+            // width: 50px;
+            // height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.5s ease;
+
+
+        }
+
+        .menu:hover {
+            opacity: 0.4;
+        }
+
+        .text {
+            font-size: 26px;
+            font-weight: 600;
+
+            .link {
+                transition: all 0.3s ease;
+            }
+
+            .link:hover {
+                opacity: 0.4;
+            }
+
+            a {
+    color: #11101d;
+    text-decoration: none;
+}
+        }
+    }
+
+
 }
 
 .home-section.close {
     left: 78px;
     width: calc(100% - 78px);
-}
-
-.home-section .home-content {
-    height: 60px;
-    display: flex;
-    align-items: center;
-}
-
-.home-section .home-content .menu,
-.home-section .home-content .text {
-    color: #11101d;
-    font-size: 35px;
-    /* transition: all 0.5s ease; */
-}
-
-.home-section .home-content .menu {
-    margin: 0 15px;
-    cursor: pointer;
-    /* width: 50px;
-    height: 50px; */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.5s ease;
-}
-
-.home-section .home-content .menu:hover {
-    opacity: 0.4;
-}
-
-.home-section .home-content .text .link {
-    transition: all 0.3s ease;
-}
-
-.home-section .home-content .text .link:hover {
-    opacity: 0.4;
-}
-
-.home-section .home-content .text {
-    font-size: 26px;
-    font-weight: 600;
-}
-
-.home-section .home-content .text a {
-    color: #11101d;
-    text-decoration: none;
 }
 
 .container-custom {
@@ -111,14 +115,14 @@ watch(() => route.path, (path) => {
     display: flex;
     justify-content: center;
     align-items: center;
-}
 
-.container-custom main {
-    background: #fff;
-    width: calc(100% - 10px);
-    height: 100%;
-    margin-bottom: 10px;
-    border-radius: 6px;
-    overflow-y: auto;
+    main {
+        background: #fff;
+        width: calc(100% - 10px);
+        height: 100%;
+        margin-bottom: 10px;
+        border-radius: 6px;
+        overflow-y: auto;
+    }
 }
 </style>

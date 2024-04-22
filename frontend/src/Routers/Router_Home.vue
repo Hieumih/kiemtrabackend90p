@@ -1,9 +1,15 @@
 <template>
-    <LeftSideBar :isClosed="isClosed" :url_link_icon_child="url_paths" />
+    <LeftSideBar :isClosed="isClosed" :url_link_icon_child="url_paths">
+        <!-- <template #logo_img>
+            <img :src="`./img/sidebarLogo.png`" alt="">
+        </template> -->
+        <template #logo_name>
+            <p style="margin: 0;">CSOFT</p>
+        </template>
+    </LeftSideBar>
     <HomeSection :isClosed="isClosed" @closeSidebar="closeSidebar">
         <router-view v-slot="{ Component, route }">
-            <Transition name="page-fade" mode="out-in" :enter-active-class="route.meta.enterActiveClass"
-                :leave-active-class="route.meta.leaveActiveClass">
+            <Transition name="page-fade" mode="out-in">
                 <component :is="Component" />
             </Transition>
         </router-view>
@@ -24,10 +30,6 @@ localStorage.getItem('isClosed') ? null : localStorage.setItem('isClosed', false
 let isClosed = ref(localStorage.getItem('isClosed') === 'true' ? true : false);
 
 const isDev = ref(import.meta.env.DEV);
-
-const toastContainerRef = ref(null);
-
-
 
 const closeSidebar = () => {
     isClosed.value = !isClosed.value;

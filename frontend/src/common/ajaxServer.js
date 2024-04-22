@@ -1,5 +1,5 @@
 import $ from 'jquery';
-import { getAPIUrl } from '~common/config.js';
+import { getAPIUrl } from '@/common/config.js';
 
 const apiUrl = getAPIUrl();
 
@@ -24,12 +24,7 @@ export const check_login = async () => {
         },
     };
 
-    const byPassLogin = localStorage.getItem('byPassLogin') === 'true' && import.meta.env.DEV;
-    if (byPassLogin) { 
-        return new Promise((resolve, reject) => {
-            resolve(true);
-        });
-    }
+
 
     return new Promise((resolve, reject) => {
         $.ajax(settings).done((data, textStatus, xhr) => {
@@ -77,4 +72,159 @@ export const login = (login_model) => {
 export const logout = () => {
     sessionStorage.removeItem('token');
     return true;
+}
+
+export const getLocations = async (options) => {
+    var settings = {
+        "url": apiUrl + "Locations",
+        "method": "GET",
+        "timeout": 0,
+        "headers": {
+            "Content-Type": "application/json",
+        },
+        "data": options,
+    };
+    
+    return new Promise((resolve, reject) => {
+        $.ajax(settings).done((response, textStatus, xhr) => {
+            if (xhr.status === 200) {
+                resolve(response);
+            }
+            else {
+                reject(false);
+            }
+        }).fail(function (error) {
+            reject(false);
+        });
+    });
+        
+
+};
+
+export const addLocation = async (item) => {
+    var settings = {
+        "url": apiUrl + "Locations/add",
+        "method": "POST",
+        "timeout": 0,
+        "headers": {
+            "Content-Type": "application/json"
+        },
+        "data": JSON.stringify(item),
+    };
+
+    return new Promise((resolve, reject) => {
+        $.ajax(settings).done((response, textStatus, xhr) => {
+            if (xhr.status === 200) {
+                resolve(true);
+            }
+            else {
+                reject(false);
+            }
+        }).fail(function (error) {
+            reject(false);
+        });
+    });
+
+
+}
+
+export const editLocation = async (item) => {
+    var settings = {
+        "url": apiUrl + "Locations/update",
+        "method": "PUT",
+        "timeout": 0,
+        "headers": {
+            "Content-Type": "application/json"
+        },
+        "data": JSON.stringify(item),
+    };
+
+    return new Promise((resolve, reject) => {
+        $.ajax(settings).done((response, textStatus, xhr) => {
+            if (xhr.status === 200) {
+                resolve(true);
+            }
+            else {
+                reject(false);
+            }
+        }).fail(function (error) {
+            reject(false);
+        });
+    });
+
+}
+
+export const deleteLocation = async (item) => {
+    var settings = {
+        "url": apiUrl + "Locations/deleteOne",
+        "method": "DELETE",
+        "timeout": 0,
+        "headers": {
+            "Content-Type": "application/json"
+        },
+        "data": JSON.stringify(item),
+    };
+
+    return new Promise((resolve, reject) => {
+        $.ajax(settings).done((response, textStatus, xhr) => {
+            if (xhr.status === 200) {
+                resolve(true);
+            }
+            else {
+                reject(false);
+            }
+        }).fail(function (error) {
+            reject(false);
+        });
+    });
+}
+
+export const deleteLocations = async (items) => {
+    var settings = {
+        "url": apiUrl + "Locations/deleteRange",
+        "method": "DELETE",
+        "timeout": 0,
+        "headers": {
+            "Content-Type": "application/json"
+        },
+        "data": JSON.stringify(items),
+    };
+
+    return new Promise((resolve, reject) => {
+        $.ajax(settings).done((response, textStatus, xhr) => {
+            if (xhr.status === 200) {
+                resolve(true);
+            }
+            else {
+                reject(false);
+            }
+        }).fail(function (error) {
+            reject(false);
+        });
+    });
+}
+
+export const importLocations = async (items) => {
+    var settings = {
+        "url": apiUrl + "Locations/import",
+        "method": "POST",
+        "timeout": 0,
+        "headers": {
+            "Content-Type": "application/json"
+        },
+        "data": JSON.stringify(items),
+    };
+
+    return new Promise((resolve, reject) => {
+        $.ajax(settings).done((response, textStatus, xhr) => {
+            if (xhr.status === 200) {
+                resolve(true);
+            }
+            else {
+                reject(false);
+            }
+        }).fail(function (error) {
+            reject(false);
+        });
+    });
 }

@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
+
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -89,6 +90,10 @@ builder.Services.AddAuthentication(options =>
 //    //options.Cookie.HttpOnly = true;
 //    options.AccessDeniedPath = "/Forbidden/";
 //});
+
+builder.Services.AddMemoryCache();
+
+
 
 builder.Services.Configure<IdentityOptions>(options =>
 {

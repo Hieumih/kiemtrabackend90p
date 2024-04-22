@@ -71,6 +71,11 @@ const router = createRouter({
 })
 
 router.beforeEach( async (to, from, next) => {
+    const byPassLogin = localStorage.getItem('byPassLogin') === 'true' && import.meta.env.DEV;
+    if (byPassLogin) { 
+        return next();
+    }
+
     const isLogin = await check_login();
     console.log('login', isLogin);
     if (to.meta.requiresAuth) {
