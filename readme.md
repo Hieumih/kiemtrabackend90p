@@ -34,4 +34,18 @@
 * Lưu ý chỉ dùng ở `http://localhost:5173/location`
 
 # Hướng dẫn cho production
-1. Hướng dẫn sau 😐
+
+## Phía Server
+1. Vào Solution 
+1. Chuột phải vào project `CRM_CMC`
+1. Ấn vào Publish
+1. Hiện ra màn hình `CRM_CMC:Publish` -> Ấn Publish
+1. Vào đường dẫn [Publish](./CRM_CMC/bin/Release/net6.0/publish/) -> Bản build của bạn ở đây
+1. Nhớ vào `appsettings.json` để sửa lại sâu nhé
+
+## Phía client:
+1. Mở developer powershell
+1. Cd `frontend`
+1. Chạy lệnh `npm run build`
+1. Copy thư mục `dist` vào [Publish](./CRM_CMC/bin/Release/net6.0/publish/) -> DONE
+
