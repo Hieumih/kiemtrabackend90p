@@ -1,4 +1,10 @@
 # LƯU Ý
+## Cài đặt SQL
+- Mở VSCODE 2022:
+    - xóa mirgation
+    - sử dụng `add-migration`
+    - `updata-database`
+## THÊM USER VÀO CSDL
 - Cần thêm tài khoản ở Swagger
     - Thêm ROLE bằng cổng 'seed-role'
     - Tạo 1 User ở sign-in
@@ -6,10 +12,7 @@
     - Lấy token rồi thêm nó vò Author...
     - Test API thoải mái
 
-
-
 # Cập nhật
-
 
 ## build 6
 - Thêm chức năng phân quyền
