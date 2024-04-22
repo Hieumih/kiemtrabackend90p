@@ -36,10 +36,10 @@
 </template>
 
 <script setup>
-import { ref, watch, onMounted, defineEmits, defineProps, defineExpose } from "vue";
-import { Modal_Form } from '@/components/elements/index.js';
+import { ref, watch, onMounted, defineEmits, defineProps, defineExpose, defineAsyncComponent } from "vue";
 import XLSX from 'xlsx'; // Excel parser
 import { jsPDF } from 'jspdf'; // PDF parser
+import { Modal_Form } from '@/components/elements/index.js';
 import "jspdf-autotable"; // PDF table parser
 
 const modalRef = ref(null);

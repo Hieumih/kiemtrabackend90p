@@ -106,11 +106,15 @@
 
 <script setup>
 import 'vue3-easy-data-table/dist/style.css';
-import { ref, defineProps, defineEmits, onMounted, watch } from 'vue';
+import { ref, defineProps, defineEmits, onMounted, watch, defineAsyncComponent } from 'vue';
 import { useRouter } from "vue-router"
-import { Modal_Form, Modal_Import, Modal_Export, Modal } from '@/components/elements/index.js'
-import EasyDataTable from 'vue3-easy-data-table';
+// import { Modal_Form, Modal_Import, Modal_Export, Modal } from '@/components/elements/index.js'
 import { debounce } from "lodash";
+const EasyDataTable = defineAsyncComponent(() => import('vue3-easy-data-table'));
+const Modal_Form = defineAsyncComponent(() => import('@/components/elements/Ele_Modal_Form.vue'));
+const Modal_Import = defineAsyncComponent(() => import('@/components/elements/Ele_Modal_Import.vue'));
+const Modal_Export = defineAsyncComponent(() => import('@/components/elements/Ele_Modal_Export.vue'));
+const Modal = defineAsyncComponent(() => import('@/components/elements/Ele_Modal.vue'));
 
 //#region declare props and emits
 const props = defineProps({

@@ -48,8 +48,8 @@
 </template>
 
 <script setup>
-import { ref, defineExpose, onMounted, defineProps, defineEmits } from 'vue';
-import Ele_Modal from "@/components/elements/Ele_Modal.vue";
+import { ref, defineExpose, onMounted, defineProps, defineEmits, defineAsyncComponent } from 'vue';
+const Ele_Modal = defineAsyncComponent(() => import('@/components/elements/Ele_Modal.vue'));
 
 
 const formRef = ref(null);

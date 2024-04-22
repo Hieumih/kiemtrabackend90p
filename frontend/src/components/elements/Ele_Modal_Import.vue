@@ -60,9 +60,10 @@
 <script setup>
 import 'vue3-easy-data-table/dist/style.css';
 import { ref, defineProps, defineEmits, onMounted, defineAsyncComponent, defineExpose, watch } from 'vue';
-import Ele_Modal from '@/components/elements/Ele_Modal.vue';
 import XLSX from 'xlsx'; // Excel parser
 const EasyDataTable = defineAsyncComponent(() => import('vue3-easy-data-table'));
+// import Ele_Modal from '@/components/elements/Ele_Modal.vue';
+const Ele_Modal = defineAsyncComponent(() => import('@/components/elements/Ele_Modal.vue'));
 
 const props = defineProps({
     columns: {
