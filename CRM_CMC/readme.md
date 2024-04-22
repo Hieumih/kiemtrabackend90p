@@ -3,7 +3,7 @@
 - Mở VSCODE 2022:
     - xóa mirgation
     - sử dụng `add-migration`
-    - `updata-database`
+    - `update-database`
 ## THÊM USER VÀO CSDL
 - Cần thêm tài khoản ở Swagger
     - Thêm ROLE bằng cổng 'seed-role'
