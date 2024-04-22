@@ -4,10 +4,12 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 using CRM_CMC.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using CRM_CMC.App_Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace CRM_CMC.Contexts
 {
-    public partial class BACKEND_CRMContext : IdentityDbContext<UserInfo>
+    public partial class BACKEND_CRMContext : IdentityDbContext<UserInfo, UserRole, string>
     {
         public BACKEND_CRMContext()
         {

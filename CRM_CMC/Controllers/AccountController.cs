@@ -53,7 +53,7 @@ namespace CRM_CMC.Controllers
             });
         }
 
-        [Authorize(Roles = StaticUserRole.Admin)]
+        // [Authorize(Roles = $"{StaticUserRole.Admin}, {StaticUserRole.Staff}")]
         [HttpPost("seed-role")]
         public async Task<IActionResult> SeedRole()
         {
@@ -68,7 +68,7 @@ namespace CRM_CMC.Controllers
         }
 
         //[Authorize(Roles = StaticUserRole.Admin)]
-        [Authorize(Roles = "Admin")]
+        // [Authorize(Roles = "Admin")]
         [HttpPost("set-role")]
         public async Task<IActionResult> SetRole(Guid userID, string role)
         {

@@ -652,7 +652,7 @@ namespace CRM_CMC.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
+            modelBuilder.Entity("CRM_CMC.Models.UserRole", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
@@ -668,6 +668,15 @@ namespace CRM_CMC.Migrations
                     b.Property<string>("NormalizedName")
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
+
+                    b.Property<bool>("canDelete")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("canEdit")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("canView")
+                        .HasColumnType("bit");
 
                     b.HasKey("Id");
 
@@ -846,7 +855,7 @@ namespace CRM_CMC.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
+                    b.HasOne("CRM_CMC.Models.UserRole", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -873,7 +882,7 @@ namespace CRM_CMC.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
+                    b.HasOne("CRM_CMC.Models.UserRole", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)

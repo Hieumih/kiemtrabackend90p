@@ -1,3 +1,13 @@
+# LƯU Ý
+- Cần thêm tài khoản ở Swagger
+    - Thêm ROLE bằng cổng 'seed-role'
+    - Tạo 1 User ở sign-in
+    - Đăng nhập bằng user đó
+    - Lấy token rồi thêm nó vò Author...
+    - Test API thoải mái
+
+
+
 # Cập nhật
 
 ## build 5
