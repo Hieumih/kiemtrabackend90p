@@ -1,1 +1,2 @@
 D:\Documents\CSharp\ASPNET\CRM_CMC\frontend\obj\Debug\frontend.esproj.CoreCompileInputs.cache
+D:\Documents\CSharp\ASPNET\CRMAPP_CMC\frontend\obj\Debug\frontend.esproj.CoreCompileInputs.cache

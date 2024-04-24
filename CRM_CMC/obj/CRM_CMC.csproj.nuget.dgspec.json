@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Documents\\CSharp\\ASPNET\\CRM_CMC\\CRM_CMC\\CRM_CMC.csproj": {}
+    "D:\\Documents\\CSharp\\ASPNET\\CRMAPP_CMC\\CRM_CMC\\CRM_CMC.csproj": {}
   },
   "projects": {
-    "D:\\Documents\\CSharp\\ASPNET\\CRM_CMC\\CRM_CMC\\CRM_CMC.csproj": {
+    "D:\\Documents\\CSharp\\ASPNET\\CRMAPP_CMC\\CRM_CMC\\CRM_CMC.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Documents\\CSharp\\ASPNET\\CRM_CMC\\CRM_CMC\\CRM_CMC.csproj",
+        "projectUniqueName": "D:\\Documents\\CSharp\\ASPNET\\CRMAPP_CMC\\CRM_CMC\\CRM_CMC.csproj",
         "projectName": "CRM_CMC",
-        "projectPath": "D:\\Documents\\CSharp\\ASPNET\\CRM_CMC\\CRM_CMC\\CRM_CMC.csproj",
+        "projectPath": "D:\\Documents\\CSharp\\ASPNET\\CRMAPP_CMC\\CRM_CMC\\CRM_CMC.csproj",
         "packagesPath": "C:\\Users\\Hieu Nguyen Minh\\.nuget\\packages\\",
-        "outputPath": "D:\\Documents\\CSharp\\ASPNET\\CRM_CMC\\CRM_CMC\\obj\\",
+        "outputPath": "D:\\Documents\\CSharp\\ASPNET\\CRMAPP_CMC\\CRM_CMC\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Hieu Nguyen Minh\\AppData\\Roaming\\NuGet\\NuGet.Config",

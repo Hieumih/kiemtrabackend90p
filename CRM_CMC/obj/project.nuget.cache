@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "qOLIb4575YD5ibI8wVgu+JhrBK5BMc79KSkmI5hTZKKFISiAakiWnj/kiokEBf6hzcFygA3HtAvYleSVH7bjWw==",
+  "dgSpecHash": "cYOvEGomimM1/pQ+SeY3YaFkPu3xqqo1DmCX31j+LQrgXvIsTktnxPx8jdyYNLWD2qMfKRt5XCIfR1MxAxefDw==",
   "success": true,
-  "projectFilePath": "D:\\Documents\\CSharp\\ASPNET\\CRM_CMC\\CRM_CMC\\CRM_CMC.csproj",
+  "projectFilePath": "D:\\Documents\\CSharp\\ASPNET\\CRMAPP_CMC\\CRM_CMC\\CRM_CMC.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Hieu Nguyen Minh\\.nuget\\packages\\automapper\\10.0.0\\automapper.10.0.0.nupkg.sha512",
     "C:\\Users\\Hieu Nguyen Minh\\.nuget\\packages\\csvhelper\\31.0.3\\csvhelper.31.0.3.nupkg.sha512",

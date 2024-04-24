@@ -10,20 +10,25 @@
 import { ref, defineProps, defineEmits, onMounted } from 'vue';
 import { Table_Manager } from '@/components/elements/index.js'
 import {
-    getLocations as gets,
-    editLocation as edit,
-    addLocation as add,
-    deleteLocation as remove,
-    deleteLocations as removes,
-    importLocations as import_data
+    getHangHoas as gets,
+    editHangHoa as edit,
+    addHangHoa as add,
+    deleteHangHoa as remove,
+    deleteHangHoas as removes,
+    importHangHoas as import_data
 } from '@/common/ajaxServer';
 import { addNotification } from '@/common/common';
 
 const columns = ref(
     [
-        { text: 'Mã', value: 'code', required: true, sortable: true },
-        { text: 'Tên Khu Vực', value: 'name', required: true, sortable: true },
-        { text: 'Mô tả', value: 'description' },
+        // { text: 'id', value: 'hhId   ', required: true, sortable: true },
+        { text: 'Mã phân loại', value: 'hhNhhId', required: true, sortable: true },
+        { text: 'Mã', value: 'hhMa' },
+        { text: 'Tên', value: 'hhTen' },
+        { text: 'Giá nhập', value: 'hhGianhap', type: 'number'},
+        { text: 'Giá bán', value: 'hhGiaban', type: 'number'},
+        
+
     ]
 )
 
@@ -37,6 +42,7 @@ const getItems = async (option, search, items, length, loading) => {
         sortBy: option.value.sortBy,
         sortType: option.value.sortType,
     }).then((res) => {
+        console.log(res)
         items.value = res.data;
         length.value = res.recordsTotal;
     }).catch((err) => {

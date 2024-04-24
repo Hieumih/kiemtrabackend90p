@@ -1,7 +1,8 @@
 
+// using CRM_CMC.Contexts;
 using CRM_CMC.Contexts;
 using CRM_CMC.Models;
-using CRM_CMC.Repositories;
+//using CRM_CMC.Repositories;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
@@ -47,42 +48,43 @@ builder.Services.AddSwaggerGen(options =>
         }
     });
 });
-//builder.Services.AddDbContext<BACKEND_CRMContext>(options => options.UseSqlite(builder.Configuration.GetConnectionString("CRM_SQLite")));
-builder.Services.AddDbContext<BACKEND_CRMContext>(options => 
-    options.UseSqlServer(builder.Configuration.GetConnectionString("CRM")));
 
-builder.Services
-    .AddIdentity<UserInfo, UserRole>()
-    .AddEntityFrameworkStores<BACKEND_CRMContext>()
-    .AddDefaultTokenProviders();
+builder.Services.AddDbContext<banhangContext>(options => options.UseSqlite(builder.Configuration.GetConnectionString("sqlite")));
+//builder.Services.AddDbContext<banhangContext>(options =>
+//    options.UseSqlServer(builder.Configuration.GetConnectionString("banhang")));
+
+// builder.Services
+//     .AddIdentity<UserInfo, UserRole>()
+//     .AddEntityFrameworkStores<BACKEND_CRMContext>()
+//     .AddDefaultTokenProviders();
 
 //builder.Services.AddDefaultIdentity<userInfo>(options => options.SignIn.RequireConfirmedAccount = true)
 //    .AddEntityFrameworkStores<BACKEND_CRMContext>();
 
-builder.Services.AddScoped<IAccountRepositories, AccountRepositories>();
+//builder.Services.AddScoped<IAccountRepositories, AccountRepositories>();
 
-builder.Services.AddAuthentication(options =>
-{
-    options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
-    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+//builder.Services.AddAuthentication(options =>
+//{
+//    options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+//    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+//    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
 
-})
-.AddJwtBearer(options =>
-{
-    options.SaveToken = true;
-    options.RequireHttpsMetadata = false;
-    options.TokenValidationParameters = new TokenValidationParameters
-    {
-        ValidateIssuer = true,
-        ValidateAudience = true,
-        ValidateLifetime = true,
-        ValidateIssuerSigningKey = true,
-        ValidIssuer = builder.Configuration["JWT:Issuer"],
-        ValidAudience = builder.Configuration["JWT:Audience"],
-        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JWT:Secret"]))
-    };
-});
+//})
+//.AddJwtBearer(options =>
+//{
+//    options.SaveToken = true;
+//    options.RequireHttpsMetadata = false;
+//    options.TokenValidationParameters = new TokenValidationParameters
+//    {
+//        ValidateIssuer = true,
+//        ValidateAudience = true,
+//        ValidateLifetime = true,
+//        ValidateIssuerSigningKey = true,
+//        ValidIssuer = builder.Configuration["JWT:Issuer"],
+//        ValidAudience = builder.Configuration["JWT:Audience"],
+//        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JWT:Secret"]))
+//    };
+//});
 //.AddCookie(options =>
 //{
 //    options.ExpireTimeSpan = TimeSpan.FromHours(3);
