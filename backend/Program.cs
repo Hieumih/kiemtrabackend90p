@@ -1,7 +1,7 @@
 
 // using CRM_CMC.Contexts;
-using CRM_CMC.Contexts;
-using CRM_CMC.Models;
+using backend.Contexts;
+using backend.Models;
 //using CRM_CMC.Repositories;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.JwtBearer;

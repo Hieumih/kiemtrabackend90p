@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
-namespace CRM_CMC.Models
+namespace backend.Models
 {
     public class UserInfo : IdentityUser
     {

@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
-using CRM_CMC.Models;
+using backend.Models;
 
-namespace CRM_CMC.Contexts
+namespace backend.Contexts
 {
     public partial class banhangContext : DbContext
     {

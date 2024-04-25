@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 
-namespace CRM_CMC.Models
+namespace backend.Models
 {
     public class UserRole : IdentityRole
     {

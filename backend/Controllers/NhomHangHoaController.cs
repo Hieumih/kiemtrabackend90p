@@ -1,10 +1,10 @@
-﻿using CRM_CMC.Contexts;
-using CRM_CMC.Models;
+﻿using backend.Contexts;
+using backend.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
-namespace CRM_CMC.Controllers
+namespace backend.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

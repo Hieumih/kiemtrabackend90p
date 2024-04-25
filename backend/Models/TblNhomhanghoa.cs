@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace CRM_CMC.Models
+namespace backend.Models
 {
     public partial class TblNhomhanghoa
     {

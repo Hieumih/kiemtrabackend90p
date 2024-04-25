@@ -1,4 +1,4 @@
-namespace CRM_CMC
+namespace backend
 {
     public class WeatherForecast
     {

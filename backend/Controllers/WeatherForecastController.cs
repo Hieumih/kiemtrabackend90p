@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 
-namespace CRM_CMC.Controllers
+namespace backend.Controllers
 {
     [ApiController]
     [Route("[controller]")]
