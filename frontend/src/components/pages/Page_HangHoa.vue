@@ -21,8 +21,8 @@ import { addNotification } from '@/common/common';
 
 const columns = ref(
     [
-        // { text: 'id', value: 'hhId   ', required: true, sortable: true },
-        { text: 'Mã phân loại', value: 'hhNhhId', required: true, sortable: true },
+        { text: 'id', value: 'hhId', required: true, sortable: true, disabled: true  },
+        { text: 'Mã phân loại', value: 'hhNhhId', required: true, sortable: true},
         { text: 'Mã', value: 'hhMa' },
         { text: 'Tên', value: 'hhTen' },
         { text: 'Giá nhập', value: 'hhGianhap', type: 'number'},
@@ -56,6 +56,7 @@ const getItems = async (option, search, items, length, loading) => {
 const addItem = (item, done) => {
     add(item).then(() => {
         done();
+        addNotification("Add success", "success");
     }).catch((err) => {
         console.log(err);
         addNotification("Add failed", "error");
@@ -65,6 +66,7 @@ const addItem = (item, done) => {
 const editItem = (item, done) => {
     edit(item).then(() => {
         done();
+        addNotification("Edit success", "success");
     }).catch((err) => {
         console.log(err);
         addNotification("Edit failed", "error");
@@ -74,6 +76,7 @@ const editItem = (item, done) => {
 const deleteItem = (item, done) => {
     remove(item).then(() => {
         done();
+        addNotification("Delete success", "success");
     }).catch((err) => {
         console.log(err);
         addNotification("Delete failed", "error");

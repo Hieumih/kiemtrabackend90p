@@ -6,7 +6,7 @@
 # git add .
 # git commit -m 'first push'
 # git branch -M main
-# git push -u origin master
+# git push -u kiemtra master
 # git checkout -r main
 
 

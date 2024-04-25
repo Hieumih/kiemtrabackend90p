@@ -97,7 +97,7 @@ onMounted(() => {
 </script>
 
 <style scoped lang="scss">
-$sidebar-color: #11101d;
+$sidebar-color: #10375C;
 $profile-details-color: #1d1b31;
 
 .sidebar {

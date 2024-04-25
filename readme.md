@@ -1,4 +1,6 @@
 # Giới thiệu
+- ĐÂY LÀ PROJECT DÙNG ĐỂ KIỂM TRA
+
 
 # Yêu cầu
 1. <img src="https://dotnet.microsoft.com/favicon.ico" style="height: 20px; width:20px;"/> [.Net6](https://dotnet.microsoft.com/en-us/download/dotnet/6.0) > 6.0.28
@@ -48,4 +50,10 @@
 1. Cd `frontend`
 1. Chạy lệnh `npm run build`
 1. Copy thư mục `dist` vào [Publish](./CRM_CMC/bin/Release/net6.0/publish/) -> DONE
+
+## 
+- Sau khi xong thì bạn có thể zip lại thư mục và giải nén ở đâu tùy ý
+- Nếu bạn sử dụng termial để chạy phần mềm:
+    1. Để termial ở vị trí thư mục chứa phần mềm
+    1. Sử dụng lệnh `dotnet [TÊN PROJECT].dll` dể chạy
 

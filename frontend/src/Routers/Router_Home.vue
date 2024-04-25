@@ -4,7 +4,7 @@
             <img :src="`./img/sidebarLogo.png`" alt="">
         </template> -->
         <template #logo_name>
-            <p style="margin: 0;">CSOFT</p>
+            <p style="margin: 0;">TEST APP</p>
         </template>
     </LeftSideBar>
     <HomeSection :isClosed="isClosed" @closeSidebar="closeSidebar">

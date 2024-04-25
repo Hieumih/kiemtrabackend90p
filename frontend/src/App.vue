@@ -10,8 +10,8 @@
         </template>
     </router-view>
     <div v-if="dev" class="dev">
-        <p>IN DEVELOPMENT NOT PRODUCTION</p>
-        <button @click="logout" class="me-2">logout</button>
+        <p>not final version, some change will happened</p>
+        <!-- <button @click="logout" class="me-2">logout</button> -->
     </div>
 </template>
 
@@ -27,7 +27,7 @@ const dev = ref(import.meta.env.DEV)
 
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 * {
     margin: 0;
     padding: 0;
@@ -39,10 +39,14 @@ const dev = ref(import.meta.env.DEV)
     bottom: 0;
     right: 0;
     opacity: 0.5;
-    font-size: 1.5rem;
+    font-size: 1rem;
     z-index: 100000000000000;
     display: flex;
     flex-direction: row-reverse;
+    p {
+        pointer-events: none;
+        user-select: none;
+    }
 }
 
 .div p {

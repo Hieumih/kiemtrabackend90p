@@ -77,7 +77,7 @@ onMounted(() => {
 </script>
 
 <style scoped lang="scss">
-$submenu-hoverli-color: #1b1b31;
+$submenu-hoverli-color: #2c3e50;
 $font-color: #fff;
 
 
