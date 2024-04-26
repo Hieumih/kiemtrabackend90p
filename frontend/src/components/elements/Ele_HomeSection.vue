@@ -42,9 +42,15 @@ watch(() => route.path, (path) => {
 </script>
 
 <style scoped lang="scss">
+
+
+
 .home-section {
+    --home-section-bg: #e4e9f7;
+    --home-section-text: #11101d;
+    --home-section-main-bg: #fff;
     position: relative;
-    background: #e4e9f7;
+    background: var(--home-section-bg);
     height: 100vh;
     left: 260px;
     width: calc(100% - 260px);
@@ -59,7 +65,7 @@ watch(() => route.path, (path) => {
 
         .menu,
         .text {
-            color: #11101d;
+            color: var(--home-section-text);
             font-size: 35px;
             // transition: all 0.5s ease; 
         }
@@ -94,35 +100,35 @@ watch(() => route.path, (path) => {
             }
 
             a {
-    color: #11101d;
-    text-decoration: none;
-}
+                color: var(--home-section-text);
+                text-decoration: none;
+            }
         }
     }
 
+    &.close {
+        left: 78px;
+        width: calc(100% - 78px);
 
-}
-
-.home-section.close {
-    left: 78px;
-    width: calc(100% - 78px);
-}
-
-.container-custom {
-    width: 100%;
-    height: calc(100% - 60px);
-    /* background: #000; */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    main {
-        background: #fff;
-        width: calc(100% - 10px);
-        height: 100%;
-        margin-bottom: 10px;
-        border-radius: 6px;
-        overflow-y: auto;
     }
+
+    .container-custom {
+        width: 100%;
+        height: calc(100% - 60px);
+        /* background: #000; */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        main {
+            background: var(--home-section-main-bg);
+            width: calc(100% - 10px);
+            height: 100%;
+            margin-bottom: 10px;
+            border-radius: 6px;
+            overflow-y: auto;
+        }
+    }
+
 }
 </style>

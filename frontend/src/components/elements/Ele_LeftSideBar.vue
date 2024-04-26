@@ -97,18 +97,27 @@ onMounted(() => {
 </script>
 
 <style scoped lang="scss">
-$sidebar-color: #10375C;
-$profile-details-color: #1d1b31;
+
+
+
+
 
 .sidebar {
+    --sidebar-bg-color: #11101d;
+    --sidebar-link-hover-bg-color: #11101d;
+    --profile-details-bg-color: #1d1b31;
+    --sidebar-transition: all 0.5s ease;
+    --sidebar-font-color: #fff;
+
+
     position: fixed;
     top: 0;
     left: 0;
     height: 100%;
     width: 260px;
-    background: $sidebar-color;
     z-index: 100;
-    transition: all 0.5s ease;
+    background: var(--sidebar-bg-color);
+    transition:  var(--sidebar-transition);
 
     .logo-details {
         height: 60px;
@@ -132,7 +141,7 @@ $profile-details-color: #1d1b31;
 
             i {
                 font-size: 30px;
-                color: #fff;
+                color: var(--sidebar-font-color);
             }
         }
 
@@ -143,7 +152,7 @@ $profile-details-color: #1d1b31;
 
         .logo-name {
             font-size: 22px;
-            color: #fff;
+            color: var(--sidebar-font-color);
             font-weight: 600;
             transition: 0.3s ease;
             transition-delay: 0.1s;
@@ -162,35 +171,35 @@ $profile-details-color: #1d1b31;
             display: none;
         }
 
-        li {
-            position: relative;
-            list-style: none;
-            transition: all 0.4s ease;
+        // li {
+        //     position: relative;
+        //     list-style: none;
+        //     transition: all 0.4s ease;
 
-            //height: 50px;
-            //width: 100%;
-            //margin-bottom: 10px;
-            i {
-                height: 50px;
-                min-width: 78px;
-                text-align: center;
-                line-height: 50px;
-                color: #fff;
-                font-size: 20px;
-                cursor: pointer;
-                transition: all 0.3s ease;
-            }
+        //     //height: 50px;
+        //     //width: 100%;
+        //     //margin-bottom: 10px;
+        //     i {
+        //         height: 50px;
+        //         min-width: 78px;
+        //         text-align: center;
+        //         line-height: 50px;
+        //         color: #fff;
+        //         font-size: 20px;
+        //         cursor: pointer;
+        //         transition: all 0.3s ease;
+        //     }
 
-            a {
-                display: flex;
-                text-decoration: none;
-                align-items: center;
-            }
-        }
+        //     a {
+        //         display: flex;
+        //         text-decoration: none;
+        //         align-items: center;
+        //     }
+        // }
 
-        li:hover {
-            background: #1b1b31;
-        }
+        // li:hover {
+        //     background: #1b1b31;
+        // }
     }
 
     .profile-details {
@@ -199,10 +208,10 @@ $profile-details-color: #1d1b31;
         display: flex;
         align-items: center;
         justify-content: space-between;
-        background: $profile-details-color;
+        background: var(--profile-details-bg-color);
         width: 260px;
         padding: 6px 0;
-        transition: all 0.5s ease;
+        transition:  var(--sidebar-transition);
 
         .img-name-role {
             display: flex;
@@ -214,13 +223,13 @@ $profile-details-color: #1d1b31;
             object-fit: cover;
             border-radius: 16px;
             margin: 0 14px 0 12px;
-            background: $profile-details-color;
-            transition: all 0.5s ease;
+            background: var(--profile-details-bg-color);
+            transition:   var(--sidebar-transition);
         }
 
         .profile-name,
         .role {
-            color: #fff;
+            color: var(--sidebar-font-color);
             font-size: 18px;
             font-weight: 500;
             white-space: nowrap;

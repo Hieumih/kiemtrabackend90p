@@ -77,26 +77,25 @@ onMounted(() => {
 </script>
 
 <style scoped lang="scss">
-$submenu-hoverli-color: #2c3e50;
-$font-color: #fff;
+
+
+
 
 
 li {
+    --sidebar-bg-color: #11101d;
+    --sidebar-link-hover-bg-color: #11101d;
+    --profile-details-bg-color: #1d1b31;
+    --sidebar-transition: all 0.5s ease;
+    --sidebar-font-color: #fff;
+
     position: relative;
     list-style: none;
     transition: all 0.4s ease;
-
-    /* height: 50px;
-    width: 100%;
-    margin-bottom: 10px; */
     .icon-link {
         display: flex;
-        /* align-items: center; */
         align-items: baseline;
         justify-content: space-between;
-
-        /* padding: 15px 20px;
-    cursor: pointer; */
         .link {
             width: 70.5%;
             flex: 0 0 auto;
@@ -108,7 +107,7 @@ li {
         min-width: 78px;
         text-align: center;
         line-height: 50px;
-        color: $font-color;
+        color: var(--sidebar-font-color);
         font-size: 20px;
         cursor: pointer;
         transition: all 0.3s ease;
@@ -120,7 +119,7 @@ li {
         /* Thêm width cho arrow */
         text-align: center;
         line-height: 50px;
-        color: $font-color;
+        color: var(--sidebar-font-color);
         font-size: 20px;
         transition: all 0.3s ease;
         transform-origin: center center;
@@ -135,7 +134,7 @@ li {
         .link-name {
             font-size: 18px;
             font-weight: 400;
-            color: $font-color;
+            color: var(--sidebar-font-color);
             overflow: hidden;
             white-space: nowrap;
 
@@ -143,6 +142,7 @@ li {
                 display: inline-block;
                 white-space: nowrap;
                 overflow-x: visible;
+                margin: 0;
             }
         }
 
@@ -154,11 +154,11 @@ li {
     .sub-menu {
         padding: 6px 6px 14px 80px;
         margin-top: -10px;
-        background: $submenu-hoverli-color;
+        background: var(--sidebar-link-hover-bg-color);
         display: none;
 
         a {
-            color: $font-color;
+            color: var(--sidebar-font-color);
             font-size: 15px;
             padding: 5px 0;
             white-space: nowrap;
@@ -187,7 +187,7 @@ li {
 }
 
 li:hover {
-    background: $submenu-hoverli-color;
+    background: var(--sidebar-link-hover-bg-color);
 
     .sub-menu.blank {
         top: 50%;

@@ -49,9 +49,9 @@ builder.Services.AddSwaggerGen(options =>
     });
 });
 
-builder.Services.AddDbContext<banhangContext>(options => options.UseSqlite(builder.Configuration.GetConnectionString("sqlite")));
-//builder.Services.AddDbContext<banhangContext>(options =>
-//    options.UseSqlServer(builder.Configuration.GetConnectionString("banhang")));
+//builder.Services.AddDbContext<banhangContext>(options => options.UseSqlite(builder.Configuration.GetConnectionString("sqlite")));
+builder.Services.AddDbContext<banhangContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("banhang")));
 
 // builder.Services
 //     .AddIdentity<UserInfo, UserRole>()
