@@ -5,6 +5,6 @@
   </PropertyGroup>
   <PropertyGroup>
     <ActiveDebugProfile>backend</ActiveDebugProfile>
-    <NameOfLastUsedPublishProfile>D:\Documents\CSharp\ASPNET\CRMAPP_CMC\backend\Properties\PublishProfiles\FolderProfile1.pubxml</NameOfLastUsedPublishProfile>
+    <NameOfLastUsedPublishProfile>D:\Documents\CSharp\ASPNET\kiemtra90\backend\Properties\PublishProfiles\FolderProfile.pubxml</NameOfLastUsedPublishProfile>
   </PropertyGroup>
 </Project>

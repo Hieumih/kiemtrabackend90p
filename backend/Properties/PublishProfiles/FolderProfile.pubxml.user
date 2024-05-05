@@ -4,8 +4,8 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
 -->
 <Project>
   <PropertyGroup>
-    <_PublishTargetUrl>D:\Documents\CSharp\ASPNET\CRM_CMC\CRM_CMC\bin\Release\net6.0\publish\</_PublishTargetUrl>
-    <History>True|2024-04-13T03:21:45.7670878Z;True|2024-04-12T17:32:09.3036610+07:00;</History>
+    <_PublishTargetUrl>D:\Documents\CSharp\ASPNET\kiemtra90\backend\bin\Release\net6.0\publish\</_PublishTargetUrl>
+    <History>True|2024-05-05T16:30:08.9685794Z;True|2024-05-05T23:29:06.3931622+07:00;False|2024-05-05T23:28:27.0580396+07:00;False|2024-05-05T23:26:54.7072647+07:00;True|2024-05-05T23:26:35.6393794+07:00;False|2024-05-05T23:26:05.2025089+07:00;False|2024-05-05T23:25:27.1704424+07:00;False|2024-05-05T23:24:37.3062293+07:00;False|2024-05-05T23:24:00.1009419+07:00;True|2024-04-13T10:21:45.7670878+07:00;True|2024-04-12T17:32:09.3036610+07:00;</History>
     <LastFailureDetails />
   </PropertyGroup>
 </Project>
