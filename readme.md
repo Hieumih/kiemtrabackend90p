@@ -29,6 +29,7 @@
 1. Mở frontend
     - Mở 1 cửa sổ terminal
     - Vào thư mục frontend `cd frontend` 
+    - Chạy lệnh `npm i` để cài module
     - Chạy lệnh `npm run dev` để mở frontend ở chế độ dev
 1. Vào `http://localhost:5173/` để trải nghiệm
 
