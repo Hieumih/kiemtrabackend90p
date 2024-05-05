@@ -4390,11 +4390,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Documents\\CSharp\\ASPNET\\CRMAPP_CMC\\backend\\backend.csproj",
+      "projectUniqueName": "D:\\Documents\\CSharp\\ASPNET\\kiemtra90\\backend\\backend.csproj",
       "projectName": "backend",
-      "projectPath": "D:\\Documents\\CSharp\\ASPNET\\CRMAPP_CMC\\backend\\backend.csproj",
+      "projectPath": "D:\\Documents\\CSharp\\ASPNET\\kiemtra90\\backend\\backend.csproj",
       "packagesPath": "C:\\Users\\Hieu Nguyen Minh\\.nuget\\packages\\",
-      "outputPath": "D:\\Documents\\CSharp\\ASPNET\\CRMAPP_CMC\\backend\\obj\\",
+      "outputPath": "D:\\Documents\\CSharp\\ASPNET\\kiemtra90\\backend\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Hieu Nguyen Minh\\AppData\\Roaming\\NuGet\\NuGet.Config",
